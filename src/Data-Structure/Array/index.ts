@@ -2,6 +2,12 @@
 export class Array<T> {
   public length: number = 0;
   private data: Partial<{ [key: number]: T }> = {};
+  constructor(array: T[] = []) {
+    this.data = array.reduce((acc, val, idx) => {
+      return { ...acc, [idx]: val };
+    }, {});
+    this.length = array.length;
+  }
   get(index: number): T | unknown {
     if (!this.data) return {};
     const result = this.data[index];
@@ -27,5 +33,8 @@ export class Array<T> {
     }
     delete this.data[this.length - 1];
     this.length--;
+  }
+  allData(): (T | unknown)[] {
+    return Object.values(this.data);
   }
 }
