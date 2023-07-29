@@ -64,4 +64,13 @@ describe("Link list test suit", () => {
     console.log(actual);
     expect(suit.printList()).toEqual([1, 2, 3, 5, 6]);
   });
+  it("Should reverse the list  ", () => {
+    suit.append(2);
+    suit.append(3);
+    suit.append(4);
+    suit.append(5);
+    suit.append(6);
+    suit.reverse();
+    expect(suit.printList()).toEqual([6, 5, 4, 3, 2, 1]);
+  });
 });
