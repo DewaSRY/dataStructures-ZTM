@@ -1,5 +1,5 @@
-export class Node {
-  public next: Node | null = null;
+class Node {
+  next: Node | null = null;
   prev: Node | null = null;
   constructor(public value: number) {}
 }
