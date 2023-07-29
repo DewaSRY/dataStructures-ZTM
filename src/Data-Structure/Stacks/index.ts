@@ -1,5 +1,5 @@
 class Node {
-  public next: Node | null = null;
+  next: Node | null = null;
   prev: Node | null = null;
   constructor(public value: number) {}
 }

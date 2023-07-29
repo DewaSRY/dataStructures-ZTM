@@ -1,22 +1,36 @@
-import { Node, DataValue } from "./DS-3-LinkList";
+class Node {
+  next: Node | null = null;
+  prev: Node | null = null;
+  constructor(public value: number) {}
+}
 export class Queue {
   first: Node | null = null;
   last: Node | null = null;
   length: number = 0;
-  constructor() {}
-  peak() {
-    return this.first;
+  constructor(value: number) {
+    // this.first = new Node(value);
+    // this.last = this.first;
+    this.enqueue(value);
   }
-  equeque(value: DataValue) {
+  peek = () => {
+    console.log(this.first);
+    const { value, prev, next } = this.first!;
+    return {
+      value: value ? value : null,
+      prev: prev ? prev.value : null,
+      next: next ? next.value : null,
+    };
+  };
+  enqueue(value: number) {
     const newNode = new Node(value);
     if (this.length === 0) {
       this.first = newNode;
-      this.last = newNode;
+      this.last = this.first;
     } else {
-      const backPointer = this.last;
+      const backQueue = this.last;
       this.last = newNode;
-      backPointer.next = newNode;
-      this.last.prev = backPointer;
+      backQueue!.next = newNode;
+      this.last.prev = backQueue;
     }
     this.length++;
   }
@@ -25,9 +39,10 @@ export class Queue {
       this.first = null;
     } else if (!this.last) {
       return null;
+    } else {
+      this.first = this.first!.next;
+      this.length--;
     }
-    this.first = this.first.prev;
-    this.length--;
   }
   get printValue() {
     const printValue = [];
