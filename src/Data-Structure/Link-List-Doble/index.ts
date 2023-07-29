@@ -1,8 +1,9 @@
 export class Node {
   public next: Node | null = null;
+  prev: Node | null = null;
   constructor(public value: number) {}
 }
-export class LinkedList {
+export class LinkedListDoable {
   head: Node | null = null;
   tail: Node | null = null;
   length: number;
@@ -13,17 +14,15 @@ export class LinkedList {
   }
   append(value: number) {
     const newNode = new Node(value);
+    const lastNode = this.tail;
+    newNode.prev = lastNode;
     const currentNode = this.tail;
     if (currentNode) {
+      //   console.log(currentNode);
       currentNode.next = newNode;
     }
+    // newNode.prev = this.tail;
     this.tail = newNode;
-    this.length++;
-  }
-  prepend(value: number) {
-    const newNode = new Node(value);
-    newNode.next = this.head;
-    this.head = newNode;
     this.length++;
   }
   printList() {
@@ -34,6 +33,13 @@ export class LinkedList {
       currentNode = currentNode.next;
     }
     return array;
+  }
+  prepend(value: number) {
+    const newNode = new Node(value);
+    newNode.next = this.head;
+    this.head!.prev = newNode;
+    this.head = newNode;
+    this.length++;
   }
   traverseToIndex(index: number) {
     if (index === this.length || index >= this.length || index < 0) return null;
@@ -61,50 +67,12 @@ export class LinkedList {
       if (pervsNodes && pervsNodes.next) {
         const nextPointer = pervsNodes.next;
         pervsNodes.next = newNode;
+        newNode.prev = pervsNodes;
         newNode.next = nextPointer;
+        pervsNodes.prev = newNode;
         this.length++;
         return;
       }
     }
-  }
-  remove(index: number) {
-    if (index >= this.length) throw new Error("index out of number");
-    if (index === 0) {
-      const pervsNodes = this.head?.next;
-      if (pervsNodes) {
-        this.head = pervsNodes;
-      }
-    } else if (this.length - 1 === index) {
-      const pervsNodes = this.traverseToIndex(this.length - 2);
-      if (pervsNodes && pervsNodes.next) {
-        pervsNodes.next = null;
-        const newLastNode = this.traverseToIndex(this.length - 2);
-        this.tail = newLastNode;
-      }
-    } else {
-      const pervsNodes = this.traverseToIndex(index - 1);
-      if (pervsNodes && pervsNodes.next) {
-        const removeNode = pervsNodes.next;
-        pervsNodes.next = removeNode.next;
-      }
-    }
-    this.length--;
-  }
-  reverse() {
-    if (this.head && !this.head.next) {
-      return this.head;
-    }
-    let first = this.head;
-    this.tail = this.head;
-    let second = first!.next;
-    while (second) {
-      const temp = second.next;
-      second.next = first;
-      first = second;
-      second = temp;
-    }
-    this.head!.next = null;
-    this.head = first;
-    // return this.printList();
   }
 }
