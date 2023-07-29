@@ -28,7 +28,7 @@ export class HashTable<T> {
   get(key: string) {
     let address = this._hash(key);
     const currentBucket = this.data[address];
-    console.log(currentBucket);
+    // console.log(currentBucket);
     if (currentBucket) {
       for (let bucket of currentBucket[0]) {
         if (bucket[0] === key) {

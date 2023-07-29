@@ -45,8 +45,6 @@ describe("Hash-Table suit test", () => {
     // suit.set("five", 3);
     // suit.set("six", 3);
     // suit.set("seven", 3);
-    const actual = JSON.stringify(suit.keys(), null, 2);
-    console.log(actual);
     expect(suit.keys()).toEqual({
       second: 2,
       first: 1,
