@@ -6,7 +6,7 @@ describe("water container test suit", () => {
 
   const firstArray = [0, 1, 0, 2, 1, 0, 3, 1, 0, 1, 2];
   const firstExpected = 8;
-  //   const secondArray = [7, 1, 2, 9, 3];
+  //   const secondArray =  [0, 1, 0, 2, 1, 0, 3, 1, 0, 1, 2]
   //   const secondExpected = 21;
   //   const thirdArray = [7];
   //   const thirdExpected = 0;
