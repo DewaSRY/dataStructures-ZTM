@@ -7,56 +7,52 @@ back withe only position m to n in reverse
 ->Can we receive m and n values for the whole linked list ?
 =>Yes, we can receive m=1 and n =length of linked list
 `;
-class ListNode {
-  constructor(val, next = null) {
+export class ListNode {
+  public val: number | null;
+  public next: ListNode | null;
+  constructor(val: number | null, next: null | ListNode = null) {
     this.val = val;
     this.next = next;
   }
 }
 // ---- Generate our linked list ----
-const linkedList = [5, 4, 3, 2, 1].reduce(
+export const linkedList = [5, 4, 3, 2, 1].reduce(
   (acc, val) => new ListNode(val, acc),
-  null
+  new ListNode(null, null)
 );
 
 // ---- Generate our linked list ----
 
-const printList = (head) => {
-  if (!head) {
-    return;
+export const printList = (head: ListNode | null) => {
+  const arr: number[] = [];
+  let curetNode: ListNode | null = head;
+  while (curetNode) {
+    arr.push(curetNode.val!);
+    curetNode = curetNode.next;
   }
-
-  console.log(head.val);
-  printList(head.next);
+  return arr;
 };
-
 // --------- Our solution -----------
-
-var reverseBetween = function (head, m, n) {
+export const reverseBetween = (head: ListNode, m: number, n: number) => {
   let currentPos = 1,
     currentNode = head;
   let start = head;
-
   while (currentPos < m) {
     start = currentNode;
-    currentNode = currentNode.next;
+    currentNode = currentNode.next!;
     currentPos++;
   }
-
   let newList = null,
     tail = currentNode;
-
   while (currentPos >= m && currentPos <= n) {
-    const next = currentNode.next;
+    const next = currentNode.next!;
     currentNode.next = newList;
     newList = currentNode;
     currentNode = next;
     currentPos++;
   }
-
   start.next = newList;
   tail.next = currentNode;
-
   if (m > 1) {
     return head;
   } else {
@@ -64,6 +60,5 @@ var reverseBetween = function (head, m, n) {
   }
 };
 
-printList(linkedList);
-console.log("after reverse");
-printList(reverseBetween(linkedList, 2, 4));
+// printList(linkedList);
+// printList(reverseBetween(linkedList, 2, 4));

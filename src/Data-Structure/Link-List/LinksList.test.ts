@@ -61,7 +61,6 @@ describe("Link list test suit", () => {
     suit.append(6);
     suit.remove(3);
     const actual = JSON.stringify(suit.printList(), null, 2);
-    console.log(actual);
     expect(suit.printList()).toEqual([1, 2, 3, 5, 6]);
   });
   it("Should reverse the list  ", () => {
