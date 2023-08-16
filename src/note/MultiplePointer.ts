@@ -47,3 +47,22 @@ export function countUniqueValues(arr: number[]) {
 /**countUniqueValuesTwo
  *
  */
+export function countUniqueValuesTwo(arr: number[]) {
+  if (!arr.length) return 0;
+  let leftP = 0;
+  let duplicate = 0;
+  for (let rightP = 1; rightP < arr.length; rightP++) {
+    if (arr[leftP] !== arr[rightP]) {
+      leftP++;
+      arr[leftP] = arr[rightP];
+      // console.log(leftP, rightP);
+      console.log(arr[leftP - 1], arr[rightP]);
+    } else if (arr[leftP] === arr[rightP]) {
+      arr[leftP - 1] = arr[rightP];
+      leftP++;
+      duplicate++;
+    }
+    console.log(arr);
+  }
+  return leftP + 1 - duplicate;
+}

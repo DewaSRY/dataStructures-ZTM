@@ -47,7 +47,6 @@ export const lengthOfLongestSubstringSecond = (s: string) => {
   for (let right = 0; right < s.length; right++) {
     const currentChar = s[right];
     const previouslySeenChar = seen[currentChar];
-
     if (previouslySeenChar >= left) {
       left = previouslySeenChar + 1;
     }

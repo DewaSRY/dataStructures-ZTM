@@ -4,6 +4,7 @@ import {
   maxSubarraySumTwo,
   maxSubArraySumThree,
 } from "./SleddingWindow";
+
 describe("maxSubarraySum function compare ", () => {
   let suit = maxSubArraySumThree;
   const testOne = {

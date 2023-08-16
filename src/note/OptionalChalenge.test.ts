@@ -3,7 +3,216 @@ import {
   sameFrequency,
   areThereDuplicates,
   averagePair,
+  isSubsequence,
+  maxSubarraySum,
+  minSubArrayLen,
+  findLongestSubstring,
 } from "./OptionalChalenge";
+describe("minSubArrayLen function compare ", () => {
+  let suit = findLongestSubstring;
+  const testOne = {
+    str: "",
+    output: 0,
+  };
+  const testTwo = {
+    str: "rithmschool",
+    output: 7,
+  };
+  const testThree = {
+    str: "thisisawesome",
+    output: 6,
+  };
+  const testFourth = {
+    str: "thecatinthehat",
+    output: 7,
+  };
+  const testFive = {
+    str: "bbbbbb",
+    output: 1,
+  };
+  it.each([
+    {
+      str: testOne.str,
+      output: testOne.output,
+    },
+    {
+      str: testTwo.str,
+      output: testTwo.output,
+    },
+    {
+      str: testThree.str,
+      output: testThree.output,
+    },
+    {
+      str: testFourth.str,
+      output: testFourth.output,
+    },
+    {
+      str: testFive.str,
+      output: testFive.output,
+    },
+  ])("test $str withe $nVal  should return $output", ({ str, output }) => {
+    expect(suit(str)).toEqual(output);
+  });
+});
+describe("minSubArrayLen function compare ", () => {
+  let suit = minSubArrayLen;
+  const testOne = {
+    input1: [2, 3, 1, 2, 4, 3],
+    nVal: 7,
+    output: 2,
+  };
+  const testTwo = {
+    input1: [2, 1, 6, 5, 4],
+    nVal: 9,
+    output: 2,
+  };
+  const testThree = {
+    input1: [3, 1, 7, 11, 2, 9, 8, 21, 62, 33, 19],
+    nVal: 52,
+    output: 1,
+  };
+  const testFourth = {
+    input1: [1, 4, 16, 22, 5, 7, 8, 9, 10],
+    nVal: 55,
+    output: 5,
+  };
+  const testFive = {
+    input1: [1, 4, 16, 22, 5, 7, 8, 9, 10],
+    nVal: 39,
+    output: 3,
+  };
+  it.each([
+    {
+      inputOne: testOne.input1,
+      nVal: testOne.nVal,
+      output: testOne.output,
+    },
+    {
+      inputOne: testTwo.input1,
+      nVal: testTwo.nVal,
+      output: testTwo.output,
+    },
+    {
+      inputOne: testThree.input1,
+      nVal: testThree.nVal,
+      output: testThree.output,
+    },
+    {
+      inputOne: testFourth.input1,
+      nVal: testFourth.nVal,
+      output: testFourth.output,
+    },
+    {
+      inputOne: testFive.input1,
+      nVal: testFive.nVal,
+      output: testFive.output,
+    },
+  ])(
+    "test $inputOne withe $nVal  should return $output",
+    ({ inputOne, nVal, output }) => {
+      expect(suit(inputOne, nVal)).toEqual(output);
+    }
+  );
+});
+describe("maxSubarraySum function compare ", () => {
+  let suit = maxSubarraySum;
+  const testOne = {
+    input1: [1, 2, 5, 2, 8, 1, 5],
+    nVal: 2,
+    output: 10,
+  };
+  const testTwo = {
+    input1: [1, 2, 5, 2, 8, 5],
+    nVal: 4,
+    output: 20,
+  };
+  const testThree = {
+    input1: [4, 2, 6],
+    nVal: 1,
+    output: 6,
+  };
+  const testFourth = {
+    input1: [1, 2, 5, 2, 8, 1, 5],
+    nVal: 4,
+    output: 17,
+  };
+  const testFive = {
+    input1: [4, 2, 1, 6, 2],
+    nVal: 4,
+    output: 13,
+  };
+  it.each([
+    {
+      inputOne: testOne.input1,
+      nVal: testOne.nVal,
+      output: testOne.output,
+    },
+    {
+      inputOne: testTwo.input1,
+      nVal: testTwo.nVal,
+      output: testTwo.output,
+    },
+    {
+      inputOne: testThree.input1,
+      nVal: testThree.nVal,
+      output: testThree.output,
+    },
+    {
+      inputOne: testFourth.input1,
+      nVal: testFourth.nVal,
+      output: testFourth.output,
+    },
+    {
+      inputOne: testFive.input1,
+      nVal: testFive.nVal,
+      output: testFive.output,
+    },
+  ])(
+    "test $inputOne withe $nVal  should return $output",
+    ({ inputOne, nVal, output }) => {
+      expect(suit(inputOne, nVal)).toEqual(output);
+    }
+  );
+});
+describe("isSubsequence function  ", () => {
+  let suit = isSubsequence;
+  const testOne = {
+    sub: "hello",
+    str: "hello world",
+    output: true,
+  };
+  const testTwo = {
+    sub: "abc",
+    str: "abracadabra",
+    output: true,
+  };
+  const testThree = {
+    sub: "abc",
+    str: "acb",
+    output: false,
+  };
+
+  it.each([
+    {
+      sub: testOne.sub,
+      str: testOne.str,
+      output: testOne.output,
+    },
+    {
+      sub: testTwo.sub,
+      str: testTwo.str,
+      output: testTwo.output,
+    },
+    {
+      sub: testThree.sub,
+      str: testThree.str,
+      output: testThree.output,
+    },
+  ])("test $sub and $str should return $output", ({ sub, str, output }) => {
+    expect(suit(sub, str)).toEqual(output);
+  });
+});
 describe("averagePair function  ", () => {
   let suit = averagePair;
   const testOne = {
@@ -83,7 +292,7 @@ describe("maxSubarraySum function compare ", () => {
     }
   );
 });
-describe("maxSubarraySum function compare ", () => {
+describe("areThereDuplicates function compare ", () => {
   let suit = areThereDuplicates;
   it("should first test", () => {
     expect(suit(1, 2, 3, 4, 1)).toBe(true);
