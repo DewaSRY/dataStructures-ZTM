@@ -30,6 +30,7 @@ export class Array<T> {
   private shiftItem(index: number): void {
     for (let i = index; i < this.length - 1; i++) {
       this.data[i] = this.data[i + 1];
+      console.log(this.data);
     }
     delete this.data[this.length - 1];
     this.length--;

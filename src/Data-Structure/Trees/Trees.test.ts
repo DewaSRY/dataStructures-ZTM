@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { Trees } from "./index";
+import { Trees, traverse } from "./index";
 
 describe("trees test suit", () => {
   let suit: Trees;
@@ -36,5 +36,46 @@ describe("trees test suit", () => {
     expect(suit.root?.left?.left?.right?.value).toBe(2);
     expect(suit.root?.left?.right?.value).toBe(4);
     expect(suit.root?.left?.right?.right?.value).toBe(5);
+  });
+  it("test traverse", () => {
+    suit.insert(6);
+    suit.insert(3);
+    suit.insert(1);
+    suit.insert(3);
+    suit.insert(1);
+    suit.insert(4);
+    suit.insert(2);
+    const actual = JSON.stringify(traverse(suit.root!), null, 2);
+    expect(actual).toMatchInlineSnapshot(`
+      "{
+        \\"left\\": {
+          \\"left\\": {
+            \\"left\\": null,
+            \\"right\\": {
+              \\"left\\": null,
+              \\"right\\": {
+                \\"left\\": null,
+                \\"right\\": null,
+                \\"value\\": 2
+              },
+              \\"value\\": 1
+            },
+            \\"value\\": 1
+          },
+          \\"right\\": {
+            \\"left\\": null,
+            \\"right\\": {
+              \\"left\\": null,
+              \\"right\\": null,
+              \\"value\\": 4
+            },
+            \\"value\\": 3
+          },
+          \\"value\\": 3
+        },
+        \\"right\\": null,
+        \\"value\\": 6
+      }"
+    `);
   });
 });

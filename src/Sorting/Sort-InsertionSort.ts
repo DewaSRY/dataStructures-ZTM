@@ -1,7 +1,6 @@
-export function insertionSort(array:number[]) {
-  const {length} = array;
-  for (let i = 0; i < length; i++) {
-    if (array[i] < array[0]) {
+export function insertionSort(array: number[]) {
+  for (let i = 0; i < array.length; i++) {
+    if (i !== 0 && array[i] < array[0]) {
       array.unshift(array.splice(i, 1)[0]);
     } else {
       if (array[i] < array[i - 1]) {
@@ -13,5 +12,5 @@ export function insertionSort(array:number[]) {
       }
     }
   }
+  return array;
 }
-

@@ -3,6 +3,7 @@ class Node {
   prev: Node | null = null;
   constructor(public value: number) {}
 }
+
 export class LinkedListDoable {
   head: Node | null = null;
   tail: Node | null = null;
