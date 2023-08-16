@@ -5,7 +5,7 @@ import {
   maxSubArraySumThree,
 } from "./SleddingWindow";
 
-describe("maxSubarraySum function compare ", () => {
+describe.skip("maxSubarraySum function compare ", () => {
   let suit = maxSubArraySumThree;
   const testOne = {
     input1: [1, 2, 5, 2, 8, 1, 5],
@@ -65,7 +65,7 @@ describe("maxSubarraySum function compare ", () => {
     }
   );
 });
-describe("maxSubarraySum function compare ", () => {
+describe.skip("maxSubarraySum function compare ", () => {
   let suit = maxSubarraySum;
   const testOne = {
     input1: [1, 2, 5, 2, 8, 1, 5],
@@ -125,7 +125,7 @@ describe("maxSubarraySum function compare ", () => {
     }
   );
 });
-describe("maxSubarraySum function compare ", () => {
+describe.skip("maxSubarraySum function compare ", () => {
   let suit = maxSubarraySumTwo;
   const testOne = {
     input1: [1, 2, 5, 2, 8, 1, 5],

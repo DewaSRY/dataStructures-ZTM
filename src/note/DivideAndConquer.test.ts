@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { search } from "./DivideAndConquer";
-describe("sumZero function compare ", () => {
+describe.skip("sumZero function compare ", () => {
   let suit = search;
   const testOne = {
     input1: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],

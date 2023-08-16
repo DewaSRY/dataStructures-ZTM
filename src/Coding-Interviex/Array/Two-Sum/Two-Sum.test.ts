@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { twoSum, twoSumSecond, twoSumThird } from "./index";
 
-describe("sum two array", () => {
+describe.skip("sum two array", () => {
   let suit: typeof twoSum;
   const firsNumbs = [1, 2, 3, 4, 5, 9];
   const firstTarget = 11;

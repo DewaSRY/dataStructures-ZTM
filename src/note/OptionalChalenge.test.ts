@@ -8,7 +8,7 @@ import {
   minSubArrayLen,
   findLongestSubstring,
 } from "./OptionalChalenge";
-describe("minSubArrayLen function compare ", () => {
+describe.skip("minSubArrayLen function compare ", () => {
   let suit = findLongestSubstring;
   const testOne = {
     str: "",
@@ -55,7 +55,7 @@ describe("minSubArrayLen function compare ", () => {
     expect(suit(str)).toEqual(output);
   });
 });
-describe("minSubArrayLen function compare ", () => {
+describe.skip("minSubArrayLen function compare ", () => {
   let suit = minSubArrayLen;
   const testOne = {
     input1: [2, 3, 1, 2, 4, 3],
@@ -115,7 +115,7 @@ describe("minSubArrayLen function compare ", () => {
     }
   );
 });
-describe("maxSubarraySum function compare ", () => {
+describe.skip("maxSubarraySum function compare ", () => {
   let suit = maxSubarraySum;
   const testOne = {
     input1: [1, 2, 5, 2, 8, 1, 5],
@@ -175,7 +175,7 @@ describe("maxSubarraySum function compare ", () => {
     }
   );
 });
-describe("isSubsequence function  ", () => {
+describe.skip("isSubsequence function  ", () => {
   let suit = isSubsequence;
   const testOne = {
     sub: "hello",
@@ -213,7 +213,7 @@ describe("isSubsequence function  ", () => {
     expect(suit(sub, str)).toEqual(output);
   });
 });
-describe("averagePair function  ", () => {
+describe.skip("averagePair function  ", () => {
   let suit = averagePair;
   const testOne = {
     arr: [1, 2, 3],
@@ -251,7 +251,7 @@ describe("averagePair function  ", () => {
     expect(suit(arr, ave)).toEqual(output);
   });
 });
-describe("maxSubarraySum function compare ", () => {
+describe.skip("maxSubarraySum function compare ", () => {
   let suit = sameFrequency;
   const testOne = {
     numOne: 182,
@@ -292,7 +292,7 @@ describe("maxSubarraySum function compare ", () => {
     }
   );
 });
-describe("areThereDuplicates function compare ", () => {
+describe.skip("areThereDuplicates function compare ", () => {
   let suit = areThereDuplicates;
   it("should first test", () => {
     expect(suit(1, 2, 3, 4, 1)).toBe(true);

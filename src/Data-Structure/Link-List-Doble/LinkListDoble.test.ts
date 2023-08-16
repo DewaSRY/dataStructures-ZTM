@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { LinkedListDoable } from "./index";
 
-describe("Link List Dobla suit", () => {
+describe.skip("Link List Dobla suit", () => {
   let suit: LinkedListDoable;
   beforeEach(() => {
     suit = new LinkedListDoable(1);

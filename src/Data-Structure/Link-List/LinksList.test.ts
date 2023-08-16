@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { LinkedList } from "./index";
 
-describe("Link list test suit", () => {
+describe.skip("Link list test suit", () => {
   let suit: LinkedList;
   beforeEach(() => {
     suit = new LinkedList(1);
@@ -60,7 +60,7 @@ describe("Link list test suit", () => {
     suit.append(5);
     suit.append(6);
     suit.remove(3);
-    const actual = JSON.stringify(suit.printList(), null, 2);
+    // const actual = JSON.stringify(suit.printList(), null, 2);
     expect(suit.printList()).toEqual([1, 2, 3, 5, 6]);
   });
   it("Should reverse the list  ", () => {

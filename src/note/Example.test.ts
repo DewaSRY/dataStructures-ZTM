@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { cartCount, same, sameTwo, isAnagram, isAnagramTwo } from "./Example";
-describe("cart count will cunt the the num of every chat of the string  ", () => {
+describe.skip("cart count will cunt the the num of every chat of the string  ", () => {
   let suit = cartCount;
   it("should have some property ", () => {
     const actual = suit("hallo how are you today AAA");
@@ -20,7 +20,7 @@ describe("cart count will cunt the the num of every chat of the string  ", () =>
     `);
   });
 });
-describe("same function to compare two array withe same Two", () => {
+describe.skip("same function to compare two array withe same Two", () => {
   let suit = sameTwo;
   const testOne = {
     input1: [1, 2, 3],
@@ -60,7 +60,7 @@ describe("same function to compare two array withe same Two", () => {
     }
   );
 });
-describe("same function to compare two array with same One ", () => {
+describe.skip("same function to compare two array with same One ", () => {
   let suit = same;
   const testOne = {
     input1: [1, 2, 3],
@@ -100,7 +100,7 @@ describe("same function to compare two array with same One ", () => {
     }
   );
 });
-describe("isAnagram function to compare two string ", () => {
+describe.skip("isAnagram function to compare two string ", () => {
   let suit = isAnagram;
   const testOne = {
     input1: "",

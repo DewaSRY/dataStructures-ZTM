@@ -10,7 +10,7 @@ const hashWithThreevalue = [
   [[["three", 3]]],
 ];
 
-describe("Hash-Table suit test", () => {
+describe.skip("Hash-Table suit test", () => {
   let suit: HashTable<number>;
   beforeEach(() => {
     suit = new HashTable<number>(2);

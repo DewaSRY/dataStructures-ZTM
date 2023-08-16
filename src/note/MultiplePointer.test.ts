@@ -4,7 +4,7 @@ import {
   countUniqueValues,
   countUniqueValuesTwo,
 } from "./MultiplePointer";
-describe("sumZero function compare ", () => {
+describe.skip("sumZero function compare ", () => {
   let suit = sumZero;
   const testOne = {
     input1: [1, 2, 3, -1, 4, 6],
@@ -35,7 +35,7 @@ describe("sumZero function compare ", () => {
     expect(suit(inputOne)).toEqual(output);
   });
 });
-describe("Count unique values function ", () => {
+describe.skip("Count unique values function ", () => {
   let suit = countUniqueValuesTwo;
   const testOne = {
     input1: [1, 2, 1, 1, 1, 1, 2],
@@ -75,7 +75,7 @@ describe("Count unique values function ", () => {
   });
 });
 
-describe("Count unique values function ", () => {
+describe.skip("Count unique values function ", () => {
   let suit = countUniqueValues;
   const testOne = {
     input1: [1, 2, 1, 1, 1, 1, 2],

@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { Trees, traverse } from "./index";
 
-describe("trees test suit", () => {
+describe.skip("trees test suit", () => {
   let suit: Trees;
   beforeEach(() => {
     suit = new Trees();

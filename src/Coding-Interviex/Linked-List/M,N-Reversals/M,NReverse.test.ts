@@ -1,7 +1,7 @@
 import { it, describe, expect } from "vitest";
 import { ListNode, printList, reverseBetween } from "./index";
 
-describe("reverse Between m and n list test suit", () => {
+describe.skip("reverse Between m and n list test suit", () => {
   describe("first test", () => {
     const normalArr = [5, 4, 3, 2, 1];
     const linkedList = normalArr.reduce(

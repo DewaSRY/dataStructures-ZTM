@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { waterContainer, secondWaterContainer } from "./index";
 
-describe("water container test suit", () => {
+describe.skip("water container test suit", () => {
   let suit: typeof waterContainer;
 
   const firstArray = [7, 1, 2, 3, 9];

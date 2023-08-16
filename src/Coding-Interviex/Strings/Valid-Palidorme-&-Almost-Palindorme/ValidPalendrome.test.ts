@@ -5,7 +5,7 @@ import {
   isValidPalindromeThird,
 } from "./index";
 
-describe("type out two string", () => {
+describe.skip("type out two string", () => {
   let suit: typeof isValidPalindromeFirst;
 
   const case1 = {

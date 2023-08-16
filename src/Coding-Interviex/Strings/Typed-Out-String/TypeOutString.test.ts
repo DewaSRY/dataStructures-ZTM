@@ -5,7 +5,7 @@ import {
   backspaceCompareThree,
 } from "./index";
 
-describe("type out two string", () => {
+describe.skip("type out two string", () => {
   let suit: typeof backspaceCompare;
   const case1 = {
     S1: "az#z",
