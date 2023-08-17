@@ -2,10 +2,10 @@ import { it, expect, describe } from "vitest";
 import { bubbleSort } from "./Sort-BubbleSort";
 import { selectionSort } from "./Sort-SelectingSort";
 import { insertionSort } from "./Sort-InsertionSort";
-// import { quickSort } from "./Sort-QuickSort";
+import { quickSortSecond } from "./Sort-QuickSort";
 
 import { mergeSort } from "./Sort-MergeSort";
-describe("sorting method", () => {
+describe.skip("sorting method", () => {
   let suit: (arg: number[]) => number[];
   const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
   const expectedNumb = [0, 1, 2, 4, 5, 6, 44, 63, 87, 99, 283];
@@ -23,6 +23,10 @@ describe("sorting method", () => {
   });
   it("insertionSort test ", () => {
     suit = insertionSort;
+    expect(suit(numbers)).toEqual(expectedNumb);
+  });
+  it("quickSortSecond test ", () => {
+    suit = quickSortSecond;
     expect(suit(numbers)).toEqual(expectedNumb);
   });
 

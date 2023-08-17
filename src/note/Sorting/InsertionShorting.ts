@@ -20,7 +20,6 @@ export function InsertionSort(arr: number[]) {
         leftP++;
       }
     }
-
     rightP++;
   }
   return arr;
@@ -53,6 +52,24 @@ export function InsertionSortThree(arr: number[]) {
       arr[rightP + 1] = arr[rightP];
       arr[rightP + 1] = currentVal;
     }
+  }
+  return arr;
+}
+/**Inserting sort
+ * it's work by make two pointer the first for separate
+ * the small on the left then the other to pick num on the
+ * right side then compare it with left side, if the right
+ *  is smaller its get put on the left side
+ */
+export function InsertionSortFourth(arr: number[]) {
+  for (let leftP = 1; leftP < arr.length; leftP++) {
+    let current = arr[leftP];
+    let rightP = leftP - 1;
+    while (rightP > -1 && current < arr[rightP]) {
+      arr[rightP + 1] = arr[rightP];
+      rightP--;
+    }
+    arr[rightP + 1] = current;
   }
   return arr;
 }

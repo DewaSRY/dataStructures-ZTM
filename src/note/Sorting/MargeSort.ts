@@ -16,7 +16,7 @@
  */
 
 export function MargeSort(arr: number[]): number[] {
-  if (arr.length === 1) return arr;
+  if (arr.length < 2) return arr;
   let middleIndex = Math.floor(arr.length / 2);
   let leftPiece = arr.slice(0, middleIndex);
   let rightPiece = arr.slice(middleIndex);
@@ -48,11 +48,10 @@ function Marge(leftArr: number[], rightArr: number[]) {
 }
 
 export function MargeSortSecond(arr: number[]): number[] {
-  if (arr.length === 1) return arr;
+  if (arr.length < 2) return arr;
   let middleIndex = Math.floor(arr.length / 2);
   let leftPiece = arr.slice(0, middleIndex);
   let rightPiece = arr.slice(middleIndex);
-
   return MargeSecond(MargeSortSecond(leftPiece), MargeSortSecond(rightPiece));
 }
 function MargeSecond(leftArr: number[], rightArr: number[]) {
@@ -73,6 +72,23 @@ function MargeSecond(leftArr: number[], rightArr: number[]) {
       leftP++;
     }
   }
-
   return result.concat(rightArr.slice(rightP)).concat(leftArr.slice(leftP));
+}
+export function MargeSortThird(arr: number[]): number[] {
+  if (arr.length < 2) return arr;
+  let middleIndex = Math.floor(arr.length / 2);
+  let leftPiece = arr.slice(0, middleIndex);
+  let rightPiece = arr.slice(middleIndex);
+  return MargeThird(MargeSortThird(leftPiece), MargeSortThird(rightPiece));
+}
+function MargeThird(leftArr: number[], rightArr: number[]) {
+  const result = [];
+  while (leftArr.length && rightArr.length) {
+    if (leftArr[0] < rightArr[0]) {
+      result.push(leftArr.shift() as number);
+    } else {
+      result.push(rightArr.shift() as number);
+    }
+  }
+  return [...result, ...leftArr, ...rightArr];
 }
