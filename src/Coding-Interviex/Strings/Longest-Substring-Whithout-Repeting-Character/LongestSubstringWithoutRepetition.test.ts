@@ -10,7 +10,6 @@ describe.skip("type out two string", () => {
     S1: "abccabb",
     expect: 3,
   };
-
   describe("first method", () => {
     beforeEach(() => {
       suit = lengthOfLongestSubstring;
