@@ -12,10 +12,21 @@ describe("SinglyLInkedList test suit", () => {
   it("add new value on node and have the new node as a tail", () => {
     suit.push(2);
     expect(suit.head?.next?.value).toBe(2);
-    console.log(suit.tail);
     expect(suit.tail?.value).toBe(2);
     suit.push(3);
     expect(suit.head?.next?.next?.value).toBe(3);
     expect(suit.tail?.value).toBe(3);
+    expect(suit.length).toBe(3);
+  });
+  it("pop the last item on Linked lists ", () => {
+    suit.push(4);
+    suit.pop();
+
+    console.log(suit);
+    expect(suit.tail?.value).toBe(3);
+    expect(suit.length).toBe(3);
+    // suit.pop();
+    // suit.pop();
+    // suit.pop();
   });
 });
