@@ -7,6 +7,7 @@
  *  to place the element in the correct place
  *
  */
+
 export function InsertionSort(arr: number[]) {
   let leftP = 0;
   let rightP = 1;
@@ -19,6 +20,7 @@ export function InsertionSort(arr: number[]) {
         leftP++;
       }
     }
+
     rightP++;
   }
   return arr;

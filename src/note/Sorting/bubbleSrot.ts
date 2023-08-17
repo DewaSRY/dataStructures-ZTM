@@ -11,6 +11,7 @@ export function bubbleSort(arr: number[]) {
         noSwaps = false;
       }
     }
+
     if (noSwaps) break;
   }
   return arr;
