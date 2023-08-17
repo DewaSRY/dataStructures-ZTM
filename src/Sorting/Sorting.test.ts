@@ -5,7 +5,7 @@ import { insertionSort } from "./Sort-InsertionSort";
 // import { quickSort } from "./Sort-QuickSort";
 
 import { mergeSort } from "./Sort-MergeSort";
-describe.skip("sorting method", () => {
+describe("sorting method", () => {
   let suit: (arg: number[]) => number[];
   const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
   const expectedNumb = [0, 1, 2, 4, 5, 6, 44, 63, 87, 99, 283];
@@ -13,15 +13,15 @@ describe.skip("sorting method", () => {
     suit = bubbleSort;
     expect(suit(numbers)).toEqual(expectedNumb);
   });
-  it("bubble test ", () => {
+  it("selectionSort test ", () => {
     suit = selectionSort;
     expect(suit(numbers)).toEqual(expectedNumb);
   });
-  it("bubble test ", () => {
+  it("mergeSort test ", () => {
     suit = mergeSort;
     expect(suit(numbers)).toEqual(expectedNumb);
   });
-  it("bubble test ", () => {
+  it("insertionSort test ", () => {
     suit = insertionSort;
     expect(suit(numbers)).toEqual(expectedNumb);
   });

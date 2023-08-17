@@ -21,3 +21,16 @@ export function search(arr: number[], val: number) {
   }
   return -1;
 }
+
+export function BinarySearch(arr: number[], num: number) {
+  let leftP = 0;
+  let rightP = arr.length - 1;
+  while (leftP <= rightP) {
+    let MiddleIdx = Math.floor((rightP + leftP) / 2);
+    let middleNum = arr[MiddleIdx];
+    if (middleNum < num) leftP = MiddleIdx + 1;
+    if (middleNum > num) rightP = MiddleIdx - 1;
+    if (middleNum == num) return MiddleIdx;
+  }
+  return -1;
+}

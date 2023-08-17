@@ -1,14 +1,3 @@
-// interface Swap {
-//   arr: number[];
-//   left: number;
-//   right: number;
-// }
-// function swap(swap: Swap) {
-//   const { arr, left, right } = swap;
-//   let temp = arr[left];
-//   arr[left] = arr[right];
-//   arr[right] = temp;
-// }
 export function bubbleSort(arr: number[]) {
   const { length } = arr;
   let noSwaps: boolean;
