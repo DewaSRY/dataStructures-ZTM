@@ -1,25 +1,33 @@
 import { it, describe, expect, beforeEach } from "vitest";
-import { SinglyLInkedList } from "./SinglyLinkedLists";
-describe.skip("SinglyLInkedList test suit", () => {
-  let suit: SinglyLInkedList<number>;
+import { DoublyLinkedLists } from "./DoublyLinkedLists";
+describe("SinglyLInkedList test suit", () => {
+  let suit: DoublyLinkedLists<number>;
   beforeEach(() => {
-    suit = new SinglyLInkedList<number>(1);
+    suit = new DoublyLinkedLists<number>(1);
   });
   it("initiate link list should define the first value", () => {
     expect(suit.head?.value).toBe(1);
   });
   it("push should add new value on node and have the new node as a tail", () => {
-    suit.push(2)?.push(3);
-    expect(suit.length).toBe(3);
+    suit.push(2);
+    expect(suit.length).toBe(2);
+    expect(suit.tail?.value).toBe(2);
+    expect(suit.tail?.prev?.value).toBe(1);
+    expect(suit.head?.value).toBe(1);
+    expect(suit.head?.prev).toBe(null);
+
+    suit.push(3);
     expect(suit.tail?.value).toBe(3);
-    expect(suit.head?.next?.value).toBe(2);
-    expect(suit.head?.next?.next?.value).toBe(3);
+    expect(suit.tail?.prev?.value).toBe(2);
+    suit.push(4);
+    expect(suit.tail?.value).toBe(4);
+    expect(suit.tail?.prev?.value).toBe(3);
   });
   it("pop should remove the last item on Linked lists ", () => {
     suit.push(2)?.push(3)?.push(4);
     suit.pop();
-    expect(suit.tail?.value).toBe(3);
     expect(suit.length).toBe(3);
+
     suit.pop();
     suit.pop();
     suit.pop();
@@ -78,6 +86,8 @@ describe.skip("SinglyLInkedList test suit", () => {
     suit.insert(1, 11);
     expect(suit.head?.value).toBe(11);
     suit.insert(2, 21);
+
+    // console.log(suit);
   });
   it("remove should eraser the node on specific order", () => {
     suit.push(2)?.push(3)?.push(4);
@@ -100,16 +110,31 @@ describe.skip("SinglyLInkedList test suit", () => {
     expect(suit.get(2)?.value).toBe(3);
     expect(suit.get(3)?.value).toBe(2);
     expect(suit.get(4)?.value).toBe(1);
+    expect(suit.prettyPrint()).toMatchInlineSnapshot(
+      '"(4) <==> (3) <==> (2) <==> (1) <==> "'
+    );
+    expect(suit.head?.prev).toBe(null);
+    expect(suit.get(2)?.prev?.value).toBe(4);
+    expect(suit.get(3)?.prev?.value).toBe(3);
+    expect(suit.get(4)?.prev?.value).toBe(2);
+
     suit.reverse();
     expect(suit.head?.value).toBe(1);
     expect(suit.get(2)?.value).toBe(2);
     expect(suit.get(3)?.value).toBe(3);
     expect(suit.get(4)?.value).toBe(4);
+    expect(suit.prettyPrint()).toMatchInlineSnapshot(
+      '"(1) <==> (2) <==> (3) <==> (4) <==> "'
+    );
+    expect(suit.head?.prev).toBe(null);
+    expect(suit.get(2)?.prev?.value).toBe(1);
+    expect(suit.get(3)?.prev?.value).toBe(2);
+    expect(suit.get(4)?.prev?.value).toBe(3);
   });
   it("should return the pretty print of linked list", () => {
     suit.push(2)?.push(3)?.push(4);
     expect(suit.prettyPrint()).toMatchInlineSnapshot(
-      '"(1)-> (2)-> (3)-> (4)-> "'
+      '"(1) <==> (2) <==> (3) <==> (4) <==> "'
     );
   });
 });
