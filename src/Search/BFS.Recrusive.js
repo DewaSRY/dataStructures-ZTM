@@ -133,7 +133,6 @@ class BinarySearchTree {
     let list = [];
     let queue = [];
     queue.push(currentNode);
-
     while (queue.length > 0) {
       currentNode = queue.shift();
       list.push(currentNode.value);
@@ -159,7 +158,6 @@ class BinarySearchTree {
     if (currentNode.right) {
       queue.push(currentNode.right);
     }
-
     return this.BreadthFirstSearchR(queue, list);
   }
 }

@@ -244,7 +244,6 @@ describe("DoublyLinkedLists test suit", () => {
       suit.push(2)?.push(3)?.push(4);
       expect(suit.remove(2)?.value).toBe(2);
       expect(suit.head?.value).toBe(1);
-      console.log(suit);
       expect(suit.head?.next?.value).toBe(3);
       expect(suit.get(2)?.value).toBe(3);
       expect(suit.get(2)?.prev?.value).toBe(1);
