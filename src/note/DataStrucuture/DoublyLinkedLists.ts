@@ -1,8 +1,9 @@
-/** Singly linked lists
+/** Doubly Linked Lists  lists
  * -> A data structure that contains a head, tail and length
  *   property
  * -> Linked lists consist of nodes, and each node has a value
- *   and a pointer to another node or null
+ *   and a pointer to another node or null, doubly liked list have
+ *   next and previous pointer and make it easier to search
  */
 class Nodes<T> {
   next: Nodes<T> | null = null;
@@ -19,11 +20,10 @@ export class DoublyLinkedLists<T> {
     this.tail = this.head;
     this.length++;
   }
-  /**Push 
-     *the push List works by looping for the last node on linkLis 
-      then put the new node on the last then put the nex node on 
-      the tail list and increase the long list
-     */
+  /** Push
+   * Double linked list push work almost same with the singly but the
+   * different we put the prev pointer first on new node
+   */
   push(value: T) {
     const NewNode = new Nodes(value);
     let currentNode = this.head;
@@ -34,41 +34,27 @@ export class DoublyLinkedLists<T> {
         currentNode.next = NewNode;
         NewNode.prev = currentNode;
         this.tail = currentNode.next;
-        this.tail.prev = currentNode;
         this.length++;
         return this;
       }
     }
   }
-  /**Pop
-   * pop function works wb looping the the second last
-   * value because wee need to hold the second last value
-   * to remove the lost value, while we hold the second last
-   * value we change the last value withe null and the tail
-   * with second last value
+  /**pop
+   * on Double linked list to pop the last item, we just need to
+   * change the last item to the previous of the last item
    */
   pop() {
-    let currentNode = this.head;
+    let currentTail = this.tail;
     let longLists = this.length - 2;
     if (longLists < 0) {
       this.head = null;
       this.tail = this.head;
-      this.length--;
-      return this;
+    } else if (currentTail?.prev) {
+      this.tail = currentTail.prev;
+      this.tail.next = null;
     }
-    let loopCount = 0;
-    while (currentNode) {
-      if (loopCount < longLists) {
-        currentNode = currentNode.next;
-      } else {
-        currentNode.next = null;
-        this.tail = currentNode;
-
-        this.length--;
-        return this;
-      }
-      loopCount++;
-    }
+    this.length--;
+    return this;
   }
   /**shift
      *shift works by remove the first node on list with certain 
@@ -88,7 +74,7 @@ export class DoublyLinkedLists<T> {
       return this;
     } else if (currentNode) {
       currentNode = currentNode?.next;
-      if (currentNode?.prev) currentNode.prev = null;
+      currentNode!.prev = null;
       this.head = currentNode;
       this.length--;
       return this;
@@ -165,8 +151,6 @@ export class DoublyLinkedLists<T> {
    */
   insert(indx: number, value: T) {
     const NewNode = new Nodes(value);
-    let currentNode = this.head;
-    let loopNum = 0;
     const nodeLength = this.length;
     if (nodeLength === 0) {
       this.head = NewNode;
@@ -185,21 +169,15 @@ export class DoublyLinkedLists<T> {
       const InsertOnFirstNode = this.unshifting(value);
       return InsertOnFirstNode;
     } else {
-      while (currentNode) {
-        if (loopNum < indx - 2) {
-          currentNode = currentNode.next;
-          loopNum++;
-        } else {
-          const backPointer = currentNode;
-          const frontPointer = currentNode.next;
-          NewNode.prev = backPointer;
-          if (frontPointer?.prev) frontPointer.prev = NewNode;
-          backPointer.next = NewNode;
-          NewNode.next = frontPointer;
-          this.length++;
-          return NewNode;
-        }
-      }
+      const currentNode = this.get(indx - 1);
+      let backPointer = currentNode;
+      let frondPointer = currentNode?.next!;
+      if (backPointer?.next) backPointer.next = NewNode;
+      NewNode.prev != backPointer;
+      NewNode.next = frondPointer;
+      frondPointer.prev = NewNode;
+      this.length++;
+      return NewNode;
     }
   }
   /** Remove
@@ -212,37 +190,23 @@ export class DoublyLinkedLists<T> {
    * pointer
    */
   remove(index: number) {
-    let currentNode = this.head;
-    const LongNode = this.length;
-    let LoopCount = 0;
-    if (index > LongNode) {
+    if (index > this.length && this.tail?.prev) {
       const lastNode = this.tail;
       this.pop();
       return lastNode;
-    } else if (index <= 1 && currentNode?.next) {
-      this.head = currentNode?.next;
-      this.length--;
-      return currentNode;
-    } else if (LongNode <= 1) {
-      this.head = null;
-      this.tail = this.head;
-      this.length--;
-      // if(!LongNode)return
+    } else if (index <= 1) {
+      const currentHead = this.head;
+      this.shift();
+      return currentHead;
     } else {
-      while (currentNode) {
-        if (LoopCount < index - 1) {
-          currentNode = currentNode.next;
-          LoopCount++;
-        } else {
-          const backPointer = currentNode;
-          const frontPointer = currentNode.next;
-          if (frontPointer?.next) {
-            backPointer.next = frontPointer?.next;
-            frontPointer.prev = backPointer;
-            this.length--;
-            return backPointer;
-          }
-        }
+      const currentNode = this.get(index - 1);
+      if (currentNode) {
+        const removeNode = currentNode?.next;
+        const frontPointer = removeNode?.next!;
+        if (currentNode?.next) currentNode.next = frontPointer;
+        frontPointer.prev = currentNode;
+        this.length--;
+        return removeNode;
       }
     }
   }
