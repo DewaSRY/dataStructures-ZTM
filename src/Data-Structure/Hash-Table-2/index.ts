@@ -50,7 +50,6 @@ export class HashTable<T> {
         }
       }
     }, {} as any);
-
     return keyArray;
   }
 }
