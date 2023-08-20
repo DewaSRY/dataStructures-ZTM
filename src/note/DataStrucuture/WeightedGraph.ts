@@ -9,6 +9,21 @@
  * - Airline tickets - finding cheapest route to your destination
  * - and other else
  */
+/**Dijkstra's
+ * - This function should accept a string and ending vertex
+ * - create an object ( well call it distances) and set each to be every vertex in the adjacency list with a value of infinity , except  for the staring vertex which should have a value a 0
+ * - after setting a value in the distances object, add each vertex  with a priority of infinity to the priority queue, except the staring vertex , which should have a priority 0 because that where we beginning
+ * - create another object called previous and set each to be every vertex  in the adjacency list with a value of null
+ * - start looping as long as there is anything in the priority queue
+ * => dequeue a vertex from the priority queue i
+ * => if that vertex is the same as the ending vertex- we are done
+ * => otherwise loop through each values in the adjacency list at the vertex
+ *   -Calculate the distance to that vertex from the staring vertex
+ *   - if the distance is less then what is currently stored in out distances object
+ *   - update the distance object with ne lower distance
+ *   - update the previous object to contains that vertex
+ *   - enqueue the vertex with the total distance from the start node
+ */
 interface vertex {
   node: string;
   weight: number;
@@ -42,5 +57,27 @@ export class WeightedGraph {
         }
       });
     }
+  }
+  Dijkstra(startVertex: string, finishVertex: string) {}
+}
+/**Simple priority queue
+ *
+ */
+interface Nodes {
+  value: string;
+  priority: number;
+}
+export class PriorityQueue {
+  public values: Nodes[] = [];
+  enqueue(value: string, priority: number) {
+    this.values.push({ value, priority });
+    this.sort();
+    return this;
+  }
+  dequeue() {
+    this.values.shift();
+  }
+  sort() {
+    this.values.sort((a, b) => a.priority - b.priority);
   }
 }
