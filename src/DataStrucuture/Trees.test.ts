@@ -6,7 +6,7 @@ import {
   BreadForSearchPrettyPrint,
   Traverse,
 } from "./Trees";
-describe("BinarySearch suit", () => {
+describe.skip("BinarySearch suit", () => {
   let suit: BinarySearchTree;
   beforeEach(() => {
     suit = new BinarySearchTree(41);

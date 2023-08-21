@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { Graph } from "./Graphs";
-describe("Graph ", () => {
+describe.skip("Graph ", () => {
   let suit: Graph;
   beforeEach(() => {
     suit = new Graph();

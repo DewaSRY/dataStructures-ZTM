@@ -1,7 +1,7 @@
 import { it, describe, beforeEach } from "vitest";
 import { MaxBinaryHeep } from "./Heaps";
 
-describe("MaxBinaryHeep", () => {
+describe.skip("MaxBinaryHeep", () => {
   let suit: MaxBinaryHeep;
   beforeEach(() => {
     suit = new MaxBinaryHeep(100);

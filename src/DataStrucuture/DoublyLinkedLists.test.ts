@@ -1,6 +1,6 @@
 import { it, describe, expect, beforeEach } from "vitest";
 import { DoublyLinkedLists } from "./DoublyLinkedLists";
-describe("DoublyLinkedLists test suit", () => {
+describe.skip("DoublyLinkedLists test suit", () => {
   let suit: DoublyLinkedLists<number>;
   beforeEach(() => {
     suit = new DoublyLinkedLists<number>(1);

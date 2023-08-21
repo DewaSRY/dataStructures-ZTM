@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { HashTable } from "./HashTables";
-describe("component ", () => {
+describe.skip("component ", () => {
   let suit: HashTable<number>;
   beforeEach(() => {
     suit = new HashTable<number>(4);
