@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { Array } from "./index";
+import { Array } from "./Array";
 describe.skip("array test suit", () => {
   let suit: Array<number>;
   const arrayNumber = [1, 2, 3];

@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { Stack } from "./index";
+import { Stack } from "./Stacks";
 
 describe.skip("stack test suit", () => {
   let suit: Stack;

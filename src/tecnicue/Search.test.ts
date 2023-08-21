@@ -1,5 +1,5 @@
 import { it, describe, expect } from "vitest";
-import { SearchString } from ".";
+import { SearchString } from "./Search";
 
 describe("search", () => {
   it("search String", () => {

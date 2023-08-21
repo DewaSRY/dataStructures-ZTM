@@ -20,9 +20,15 @@ describe("WeightedGraph withe  ", () => {
       .addEdge("D", "F", 1)
       .addEdge("E", "F", 1);
   });
-
-  it.todo("should have some property ");
-  it.todo("should have some property ");
-  it.todo("should have some property ");
-  it.todo("should have some property ");
+  it(" first test Dijkstra", () => {
+    expect(suit.Dijkstra("A", "E")).toMatchInlineSnapshot(`
+      [
+        "(A})->",
+        "C",
+        "D",
+        "F",
+        "E",
+      ]
+    `);
+  });
 });

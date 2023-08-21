@@ -1,6 +1,12 @@
 import { it, describe, expect } from "vitest";
-import { factorial, collectOddsNum, collectOddValues } from ".";
-import { power, productOfArray, recursiveRange, fib, reverse } from "./index";
+import { factorial, collectOddsNum, collectOddValues } from "./Recursion";
+import {
+  power,
+  productOfArray,
+  recursiveRange,
+  fib,
+  reverse,
+} from "./Recursion";
 describe("recursive ", () => {
   it("factorial", () => {
     expect(factorial(10)).toMatchInlineSnapshot("3628800");

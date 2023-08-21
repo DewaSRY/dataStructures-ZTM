@@ -51,3 +51,23 @@ export function reverse(str: string): string {
   if (str.length <= 1) return str;
   return reverse(str.slice(1)) + str[0];
 }
+/** Dynamic Programming
+ *  A method for solving a complex problem by breaking it down
+ * into a collection of simpler subproblem, solving each of
+ * thous subproblem just once, and sorting their solutions
+ *
+ */
+export function fibOne(n: number, memo: number[] = []): number {
+  if (memo[n] !== undefined) return memo[n];
+  if (n <= 2) return 1;
+  let res = fibOne(n - 1, memo) + fibOne(n - 2, memo);
+  memo[n] = res;
+  return res;
+}
+export function FibSecond(n: number, fibNum: number[]) {
+  if (n < -2) return 1;
+  for (let num = 3; num <= n; num++) {
+    fibNum[num] = fibNum[num - 1] + fibNum[num - 2];
+  }
+  return fibNum[n];
+}
