@@ -39,7 +39,6 @@ export const lengthOfLongestSubstring = (s: string) => {
 
 export const lengthOfLongestSubstringSecond = (s: string) => {
   if (s.length <= 1) return s.length;
-
   const seen: { [k: string]: number } = {};
   let left = 0,
     longest = 0;
@@ -50,11 +49,8 @@ export const lengthOfLongestSubstringSecond = (s: string) => {
     if (previouslySeenChar >= left) {
       left = previouslySeenChar + 1;
     }
-
     seen[currentChar] = right;
-
     longest = Math.max(longest, right - left + 1);
   }
-
   return longest;
 };

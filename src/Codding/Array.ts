@@ -31,7 +31,6 @@ export function TwoSumNum(arr: number[], target: number) {
  * - find the water are which hight * width
  * - look use the second hight line * longest distance index
  */
-
 export function WaterContainer(arr: number[]) {
   if (!arr.length) return 0;
   let leftP = 0;
@@ -52,4 +51,38 @@ export function WaterContainer(arr: number[]) {
     }
   }
   return mostsWater;
+}
+/** Trapping rain Water
+ * Given an array of integer representing an elevation map
+ * where the width of each bar is 1, return how much rainwater
+ * can be trapped
+ */
+/** we use two pointer technique which we calculate the
+ * water base on the hight of the line before
+ */
+export function TrappingRainWater(arr: number[]) {
+  if (arr.length <= 2) return 0;
+  let leftP = 0;
+  let rightP = arr.length - 1;
+  let totalWater = 0;
+  let maxLeft = 0;
+  let maxRight = 0;
+  while (leftP < rightP) {
+    if (arr[leftP] <= arr[rightP]) {
+      if (arr[leftP] >= maxLeft) {
+        maxLeft = arr[leftP];
+      } else {
+        totalWater += maxLeft - arr[leftP];
+      }
+      leftP++;
+    } else {
+      if (arr[rightP] >= maxRight) {
+        maxRight = arr[rightP];
+      } else {
+        totalWater += maxRight - arr[rightP];
+      }
+      rightP--;
+    }
+  }
+  return totalWater;
 }

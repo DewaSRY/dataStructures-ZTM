@@ -74,7 +74,6 @@ export const backspaceCompareSecond = function (S: string, T: string) {
       }
     }
   }
-
   return true;
 };
 export const backspaceCompareThree = (s: string, t: string) => {

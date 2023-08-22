@@ -14,7 +14,6 @@ export const validPalindrome = function (s: string) {
   }
   return true;
 };
-
 const validSubPalindrome = function (s: string, start: number, end: number) {
   while (start < end) {
     if (s[start] !== s[end]) {

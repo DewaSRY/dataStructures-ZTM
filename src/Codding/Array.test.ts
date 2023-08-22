@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { TwoSumNum, WaterContainer, maxArea } from ".";
+import { TwoSumNum, WaterContainer, TrappingRainWater } from "./Array";
 describe("Array Question ", () => {
   describe("two sum to get the target ", () => {
     let suit = TwoSumNum;
@@ -46,6 +46,25 @@ describe("Array Question ", () => {
       {
         array: [1, 2],
         expected: 1,
+      },
+    ])("$array should return $expected", ({ array, expected }) => {
+      expect(suit(array)).toEqual(expected);
+    });
+  });
+  describe("trapping rain water ", () => {
+    let suit = TrappingRainWater;
+    it.each([
+      {
+        array: [0, 1, 0, 2, 1, 0, 3, 1, 0, 1, 2],
+        expected: 8,
+      },
+      {
+        array: [0, 1, 0],
+        expected: 0,
+      },
+      {
+        array: [0, 1],
+        expected: 0,
       },
     ])("$array should return $expected", ({ array, expected }) => {
       expect(suit(array)).toEqual(expected);

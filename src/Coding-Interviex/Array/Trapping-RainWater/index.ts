@@ -64,6 +64,5 @@ export const getTrappedRainwaterSecond = function (heights: number[]) {
       right--;
     }
   }
-
   return totalWater;
 };
