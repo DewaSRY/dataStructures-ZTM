@@ -4,27 +4,33 @@ import {
   printList,
   reverseList,
   reverseBetween,
-  ListNode,
   DoubleLInkedLists,
   printDouble,
+  LinkedList,
 } from "./LinkList";
 describe("Linked List ", () => {
   describe("reverse linked list", () => {
+    let suit: LinkedList;
+    beforeEach(() => {
+      suit = new LinkedList();
+    });
     it.each([
       {
         list: [1, 2, 3, 4, 5],
+        output: [5, 4, 3, 2, 1],
       },
-    ])("$list get reverse", ({ list }) => {
-      const linked = list.reduce(
-        (acc, val) => new ListNode(val, acc),
-        new ListNode(null, null)
-      );
-
-      const actual = reverseList(linked);
-      expect(printList(actual)).toEqual(list);
+    ])("$list get reverse", ({ list, output }) => {
+      suit.insertTer(list);
+      const actual = reverseList(suit.head!);
+      console.log(printList(actual));
+      expect(printList(actual)).toEqual(output);
     });
   });
   describe("reverse linked list between", () => {
+    let suit: LinkedList;
+    beforeEach(() => {
+      suit = new LinkedList();
+    });
     it.each([
       {
         list: [1, 2, 3, 4, 5],
@@ -32,12 +38,8 @@ describe("Linked List ", () => {
         output: [1, 4, 3, 2, 5],
       },
     ])("$list get reverse betwen", ({ list, mn, output }) => {
-      const linked = list.reduce(
-        (acc, val) => new ListNode(val, acc),
-        new ListNode(null, null)
-      );
-      const reverse = reverseList(linked)!;
-      const actual = reverseBetween(reverse, mn[0], mn[1]);
+      suit.insertTer(list);
+      const actual = reverseBetween(suit.head!, mn[0], mn[1]);
       expect(printList(actual)).toEqual(output);
     });
   });

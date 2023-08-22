@@ -1,23 +1,42 @@
 /**
  *
  */
-export class ListNode {
-  public val: number | null;
-  public next: ListNode | null;
-  constructor(val: number | null, next: null | ListNode = null) {
-    this.val = val;
-    this.next = next;
+class LinkedNode {
+  public next: LinkedNode | null = null;
+  constructor(public val: number) {}
+}
+
+export class LinkedList {
+  public head: LinkedNode | null = null;
+  insert(value: number) {
+    const newNode = new LinkedNode(value);
+    if (!this.head) {
+      this.head = newNode;
+      return this;
+    }
+    let currentNode = this.head!;
+    while (currentNode !== null) {
+      if (currentNode.next) currentNode = currentNode.next;
+      else {
+        currentNode.next = newNode;
+        return this;
+      }
+    }
+  }
+  insertTer(arr: number[]) {
+    let arrNum = arr;
+    while (arrNum.length) {
+      let val = arrNum.shift()!;
+      if (val) this.insert(val);
+    }
+    return this;
   }
 }
+
 // ---- Generate our linked list ----
-export const linkedList = [5, 4, 3, 2, 1].reduce(
-  (acc, val) => new ListNode(val, acc),
-  new ListNode(null, null)
-);
-// ---- Generate our linked list ----
-export const printList = (head: ListNode | null | DoubleNode) => {
+export const printList = (head: LinkedNode | null | DoubleNode) => {
   const arr: number[] = [];
-  let curetNode: DoubleNode | ListNode | null = head;
+  let curetNode: DoubleNode | LinkedNode | null = head;
   while (curetNode && curetNode.val) {
     arr.push(curetNode.val);
     curetNode = curetNode.next;
@@ -30,15 +49,18 @@ export const printList = (head: ListNode | null | DoubleNode) => {
  * - we make separate
  *
  */
-export const reverseList = function (head: ListNode) {
+export const reverseList = function (head: LinkedNode) {
   let prev = null;
   let current = head;
-  while (current && current.next) {
-    let nextTemp = current.next;
+
+  while (current) {
+    let nextTemp = current.next!;
     current.next = prev;
     prev = current;
+
     current = nextTemp;
   }
+  // console.log("test", printList(prev));
   return prev;
 };
 /** M,N reversals
@@ -46,7 +68,7 @@ export const reverseList = function (head: ListNode) {
  * with only position m to n in reverse,
  *
  */
-export function reverseBetween(LinkedList: ListNode, n: number, m: number) {
+export function reverseBetween(LinkedList: LinkedNode, n: number, m: number) {
   let leftP = 1;
   let currentNode = LinkedList;
   let backPinter = currentNode; //when the loop hit the n
@@ -85,12 +107,12 @@ class DoubleNode {
 
 export class DoubleLInkedLists {
   public head: DoubleNode | null = null;
-  public length = 0;
+
   insert(val: number) {
     let newNode = new DoubleNode(val);
     if (!this.head) {
       this.head = newNode;
-      this.length++;
+
       return this;
     }
     let currentNode = this.head;
@@ -205,3 +227,6 @@ function flatterSecond(DoubleNode: DoubleNode) {
   }
   return DoubleNode;
 }
+/** Cycle Detection
+ *
+ */
