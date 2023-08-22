@@ -1,5 +1,4 @@
 import { describe, it, expect, beforeEach } from "vitest";
-// import { reverseBetween } from "./LinkList";
 import {
   printList,
   reverseList,
@@ -22,7 +21,6 @@ describe("Linked List ", () => {
     ])("$list get reverse", ({ list, output }) => {
       suit.insertTer(list);
       const actual = reverseList(suit.head!);
-      console.log(printList(actual));
       expect(printList(actual)).toEqual(output);
     });
   });
@@ -59,9 +57,19 @@ describe("Linked List ", () => {
       expect(printDouble(suit.head)).toEqual(output);
     });
   });
-
-  it.todo("should have some property ");
-  it.todo("should have some property ");
-  it.todo("should have some property ");
-  it.todo("should have some property ");
+  describe("cycle detection ", () => {
+    let suit: LinkedList;
+    beforeEach(() => {
+      suit = new LinkedList();
+    });
+    it.each([
+      {
+        linked: [1, 2, 3, 4, 5, 6, 7, 8],
+      },
+    ])("cycle test at $linked", ({ linked }) => {
+      suit.insertTer(linked);
+      suit.cycleMaker(3);
+      expect(suit.cycleTest()!.val).toBe(3);
+    });
+  });
 });

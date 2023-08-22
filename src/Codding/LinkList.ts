@@ -1,11 +1,10 @@
 /**
  *
  */
-class LinkedNode {
+export class LinkedNode {
   public next: LinkedNode | null = null;
   constructor(public val: number) {}
 }
-
 export class LinkedList {
   public head: LinkedNode | null = null;
   insert(value: number) {
@@ -31,6 +30,25 @@ export class LinkedList {
     }
     return this;
   }
+  cycleTest() {
+    if (!this.head) return;
+    return FloydsTortoiseAndHare(this.head) as LinkedNode;
+  }
+  cycleMaker(num: number) {
+    if (!this.head) return this;
+    let currentNode = this.head!;
+    while (currentNode !== null) {
+      if (currentNode.next) currentNode = currentNode.next;
+      else {
+        let cycle = this.head;
+        for (let indx = 1; indx < num; indx++) {
+          cycle = cycle.next!;
+        }
+        currentNode.next = cycle;
+        return this;
+      }
+    }
+  }
 }
 
 // ---- Generate our linked list ----
@@ -52,15 +70,12 @@ export const printList = (head: LinkedNode | null | DoubleNode) => {
 export const reverseList = function (head: LinkedNode) {
   let prev = null;
   let current = head;
-
   while (current) {
     let nextTemp = current.next!;
     current.next = prev;
     prev = current;
-
     current = nextTemp;
   }
-  // console.log("test", printList(prev));
   return prev;
 };
 /** M,N reversals
@@ -104,15 +119,12 @@ class DoubleNode {
   public child: DoubleNode | null = null;
   constructor(public val: number) {}
 }
-
 export class DoubleLInkedLists {
   public head: DoubleNode | null = null;
-
   insert(val: number) {
     let newNode = new DoubleNode(val);
     if (!this.head) {
       this.head = newNode;
-
       return this;
     }
     let currentNode = this.head;
@@ -230,3 +242,36 @@ function flatterSecond(DoubleNode: DoubleNode) {
 /** Cycle Detection
  *
  */
+/** Floyd's tortoise and hare
+ * its the method when we put tortoris as pointer how move 1 step
+ * and hare is a pointer how move two pointer, the meting point
+ * have same distance with home to the cycle node, which mean if
+ * we do second loop star from meting point and home will mate
+ * again on the cycle point
+ */
+function FloydsTortoiseAndHare(likedList: LinkedNode): LinkedNode {
+  if (!likedList.next) return likedList as LinkedNode;
+  let leftP = likedList.next;
+  let rightP = likedList.next?.next;
+
+  while (leftP || rightP) {
+    if (leftP?.next || rightP?.next) {
+      if (leftP === rightP) return cycleReturn(likedList, rightP);
+    }
+    leftP = leftP?.next!;
+    rightP = rightP?.next?.next!;
+  }
+  return likedList;
+}
+function cycleReturn(home: LinkedNode, mateBefore: LinkedNode): LinkedNode {
+  let leftP = home;
+  let rightP = mateBefore;
+  while (leftP || rightP) {
+    if (leftP?.next || rightP?.next) {
+      if (leftP === rightP) return rightP;
+    }
+    leftP = leftP?.next!;
+    rightP = rightP?.next!;
+  }
+  return home;
+}
