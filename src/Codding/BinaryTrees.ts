@@ -7,7 +7,6 @@ NOTE: The beginning portion builds our test case binary tree. Scroll down to the
  */
 
 // ------- Code to generate our binary tree -------
-
 class Nodes {
   public left: Nodes | null = null;
   public right: Nodes | null = null;
@@ -111,3 +110,45 @@ export const rightSideViewDFS = (root: Nodes) => {
 /** Number of Nodes in Complete Tree
  * Given a complete binary tree, count the number of nodes
  */
+const getTreeHeight = function (root: Nodes) {
+  let height = 0;
+  while (root.left !== null) {
+    height++;
+    root = root.left;
+  }
+  return height;
+};
+const nodeExists = function (idxToFind: number, height: number, node: Nodes) {
+  let left = 0,
+    right = Math.pow(2, height) - 1,
+    count = 0;
+  while (count < height) {
+    const midOfNode = Math.ceil((left + right) / 2);
+    if (idxToFind >= midOfNode) {
+      node = node.right!;
+      left = midOfNode;
+    } else {
+      node = node.left!;
+      right = midOfNode - 1;
+    }
+    count++;
+  }
+  return node !== null;
+};
+export const countNodes = function (root: Nodes) {
+  if (!root) return 0;
+  const height = getTreeHeight(root);
+  if (height === 0) return 1;
+  const upperCount = Math.pow(2, height) - 1;
+  let left = 0,
+    right = upperCount;
+  while (left < right) {
+    const idxToFind = Math.ceil((left + right) / 2);
+    if (nodeExists(idxToFind, height, root)) {
+      left = idxToFind;
+    } else {
+      right = idxToFind - 1;
+    }
+  }
+  return upperCount + left + 1;
+};
