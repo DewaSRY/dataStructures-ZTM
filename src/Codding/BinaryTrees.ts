@@ -14,7 +14,6 @@ class Nodes {
 }
 export class BinaryTree {
   public root: Nodes | null = null;
-
   insertOne(val: number) {
     const newNode = new Nodes(val);
     if (!this.root) {
@@ -92,18 +91,15 @@ const dfs = (node: Nodes, currentLevel = 0, result: number[]) => {
   if (currentLevel >= result.length) {
     result.push(node.value!);
   }
-
   if (node.right) {
     dfs(node.right, currentLevel + 1, result);
   }
-
   if (node.left) {
     dfs(node.left, currentLevel + 1, result);
   }
 };
 export const rightSideViewDFS = (root: Nodes) => {
   const result: number[] = [];
-
   dfs(root, 0, result);
   return result;
 };
@@ -151,4 +147,31 @@ export const countNodes = function (root: Nodes) {
     }
   }
   return upperCount + left + 1;
+};
+/** Validate Binary Search tree
+ *  Given a binary tree, determine if it is a valid binary
+ * search tree
+ */
+/** the function will traverse to the bottom node with depp first search method
+ *
+ */
+const dfsValidate = (node: Nodes, min: number, max: number): boolean => {
+  if (node.value! <= min || node.value! >= max) {
+    return false;
+  }
+  if (node.left) {
+    if (!dfsValidate(node.left!, min, node.value!)) {
+      return false;
+    }
+  }
+  if (node.right) {
+    if (!dfsValidate(node.right, node.value!, max)) {
+      return false;
+    }
+  }
+  return true;
+};
+export const isValidBST = function (root: Nodes) {
+  if (!root) return true;
+  return dfsValidate(root, -Infinity, Infinity);
 };
