@@ -11,7 +11,8 @@ describe("component ", () => {
       .insertRow([6, 7, 8, 9, 10])
       .insertRow([11, 12, 13, 14, 15])
       .insertRow([16, 17, 18, 19, 20]);
-    console.log(suit.traversal());
+    // console.log(suit.traversal());
+    console.log(suit.traversalBFS());
   });
   it.todo("should have some property ");
   it.todo("should have some property ");
