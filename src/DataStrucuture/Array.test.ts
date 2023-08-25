@@ -2,31 +2,25 @@ import { describe, it, expect, beforeEach } from "vitest";
 import { Array } from "./Array";
 describe.skip("array test suit", () => {
   let suit: Array<number>;
-  const arrayNumber = [1, 2, 3];
   beforeEach(() => {
-    suit = new Array<number>(arrayNumber);
+    suit = new Array<number>([1, 2, 3, 4, 5]);
   });
   it("should add new item", () => {
-    suit.push(1);
-    const arrayLength = suit.length;
-    expect(arrayLength).toBe(4);
+    suit.push(6);
+    expect(suit.length).toBe(6);
   });
   it("should pop last item", () => {
     suit.pop();
-    const arrayLength = suit.length;
-    expect(arrayLength).toBe(3);
+    expect(suit.length).toBe(5);
   });
   it("should return all data", () => {
-    const actual = suit.allData();
-    expect(actual).toEqual(arrayNumber);
+    expect(suit.allData()).toEqual([1, 2, 3, 4, 5]);
   });
   it("should delete data n the index get set", () => {
     suit.delete(0);
-    const actual = suit.allData();
-    expect(actual).toEqual([2, 3]);
+    expect(suit.allData()).toEqual([2, 3, 4, 5]);
   });
   it("should delete data n the index get set", () => {
-    const actual = suit.get(1);
-    expect(actual).toBe(2);
+    expect(suit.get(1)).toBe(2);
   });
 });

@@ -1,13 +1,27 @@
 import { it, describe, beforeEach } from "vitest";
-import { MaxBinaryHeep } from "./Heaps";
+import { Heaps, PriorityQueue } from "./Heaps";
 
-describe.skip("MaxBinaryHeep", () => {
-  let suit: MaxBinaryHeep;
+describe("Heaps", () => {
+  let suit: Heaps;
   beforeEach(() => {
-    suit = new MaxBinaryHeep(100);
+    suit = new Heaps();
   });
   it("first test ", () => {
-    suit.insert(70);
-    console.log(suit.value);
+    suit.insertMuch([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    suit.extractValue();
+    suit.extractValue();
+    console.log(suit.heaps);
+  });
+});
+describe("Heaps", () => {
+  let suit: PriorityQueue;
+  beforeEach(() => {
+    suit = new PriorityQueue();
+  });
+  it("first test ", () => {
+    suit.insertMuch([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    suit.pop();
+    suit.pop();
+    console.log(suit.heap);
   });
 });

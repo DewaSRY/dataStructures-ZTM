@@ -3,10 +3,13 @@ export class Array<T> {
   public length: number = 0;
   private data: Partial<{ [key: number]: T }> = {};
   constructor(array: T[] = []) {
-    this.data = array.reduce((acc, val, idx) => {
+    this.insertMuch(array);
+  }
+  insertMuch(arr: T[]) {
+    this.data = arr.reduce((acc, val, idx) => {
       return { ...acc, [idx]: val };
     }, {});
-    this.length = array.length;
+    this.length = arr.length;
   }
   get(index: number): T | unknown {
     if (!this.data) return {};
@@ -30,7 +33,6 @@ export class Array<T> {
   private shiftItem(index: number): void {
     for (let i = index; i < this.length - 1; i++) {
       this.data[i] = this.data[i + 1];
-      console.log(this.data);
     }
     delete this.data[this.length - 1];
     this.length--;

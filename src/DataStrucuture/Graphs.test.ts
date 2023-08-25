@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { Graph } from "./Graphs";
-describe.skip("Graph ", () => {
+describe("Graph ", () => {
   let suit: Graph;
   beforeEach(() => {
     suit = new Graph();
@@ -56,8 +56,8 @@ describe.skip("Graph ", () => {
     });
     it("remove test", () => {
       suit.removeVertex("banana");
-      console.log("apple", suit.adjecencylist["apple"]);
-      console.log("banana", suit.adjecencylist["banana"]);
+      expect(suit.adjecencylist["apple"]).toEqual([]);
+      expect(suit.adjecencylist["banana"]).toBeUndefined();
     });
     it.each([
       { input: "apple" },

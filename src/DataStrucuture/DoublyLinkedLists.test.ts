@@ -155,13 +155,17 @@ describe.skip("DoublyLinkedLists test suit", () => {
       expect(suit.get(3)?.value).toBe(3);
       expect(suit.get(4)?.value).toBe(4);
     });
-    it.fails("error on get node out of range", () => {
+    it("error on get node out of range", () => {
       suit.push(2)?.push(3)?.push(4);
-      suit.get(10);
+      expect(() => suit.get(10)).toThrowErrorMatchingInlineSnapshot(
+        '"10 is over  the node length 4"'
+      );
     });
-    it.fails("error on get node withe order zero or lower", () => {
+    it("error on get node withe order zero or lower", () => {
       suit.push(2)?.push(3)?.push(4);
-      suit.get(0);
+      expect(() => suit.get(0)).toThrowErrorMatchingInlineSnapshot(
+        "\"node can't have order number 0 'Zero' or lower\""
+      );
     });
   });
   describe("set should update the value of the given order  link list", () => {

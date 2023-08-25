@@ -79,10 +79,10 @@ export class Heaps {
 }
 export class PriorityQueue {
   private heap: number[] = [];
-  public comparator: (a: number, b: number) => boolean = (a, b) => a > b;
-  constructor(comparator: (a: number, b: number) => boolean) {
-    this.comparator = comparator;
-  }
+
+  constructor(
+    public comparator: (a: number, b: number) => boolean = (a, b) => a > b
+  ) {}
   size() {
     return this.heap.length;
   }
