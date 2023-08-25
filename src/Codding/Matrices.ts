@@ -98,7 +98,11 @@ const traversalBFS = function (matrix: Array<Array<any>>) {
  * --> yes, assume anything outside of the 2D array is water
  */
 /** Approaching the problem
- *
+ * we use two loop to solve the problem the first loop use
+ *  to find the island then se second loop to recognize
+ *  the relation lend and make turn it into 0(water) to avoid
+ *  double counting then after no relation island we move to
+ *  first loop and repeated the step until the end of metrics
  */
 /** Number of Islands - DFS
  *
@@ -174,3 +178,135 @@ export const numberOfIslandsBFS = function (matrix: Array<Array<number>>) {
 
   return islandCount;
 };
+/** Given a 2D array containing 0's (empty cell), 1's
+ * (fresh orange) and 2's (rotten orange). Every minutes,
+ * all fresh orange immediately adjacent (4 directions) to
+ * rotten oranges will will rot.
+ * How many minutes must pass until all oranges are rotten ?
+ */
+/** Approach solution
+ * 1. Get all Initial rotten orange and put it into queue
+ * 2. count all fresh orange
+ *
+ * 3 we track every minute by the count how many time the queue get
+ *  initiate which the level of the insertion level
+ * 4 every looping the queue will get several new coordinate
+ * from the rotten orange before, the frequent of the rotten
+ * orange turn other orange to new rotten count as the minutes
+ * 5 avery increment of the rotten orange the fresh orange will
+ *  decrement
+ * 6 and if the fresh orange is not zero the means all orange
+ * will never get rotten we return zero
+ * 7 if all orange get rotten return the minutes
+ */
+
+// const testMatrix = [
+//   [2, 1, 1, 0, 0],
+//   [1, 1, 1, 0, 0],
+//   [0, 1, 1, 1, 1],
+//   [0, 1, 0, 0, 1]
+// ];
+
+const ROTTEN = 2;
+const FRESH = 1;
+// const EMPTY = 0;
+
+export const orangesRotting = function (matrix: Array<Array<number>>) {
+  if (matrix.length === 0) return 0;
+  const queue: Array<Array<number>> = [];
+  let freshOranges = 0;
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[0].length; col++) {
+      if (matrix[row][col] === ROTTEN) {
+        queue.push([row, col]);
+      }
+      if (matrix[row][col] === FRESH) {
+        freshOranges++;
+      }
+    }
+  }
+  let minutes = 0;
+  let currentQueueSize = queue.length;
+  while (queue.length > 0) {
+    if (currentQueueSize === 0) {
+      currentQueueSize = queue.length;
+      minutes++;
+    }
+    const [orangeRow, orangeCol] = queue.shift()!;
+    currentQueueSize--;
+    const row = orangeRow;
+    const col = orangeCol;
+    for (let i = 0; i < directions.length; i++) {
+      const [rowDir, colDir] = directions[i];
+      const nextRow = row + rowDir;
+      const nextCol = col + colDir;
+      if (
+        nextRow < 0 ||
+        nextRow >= matrix.length ||
+        nextCol < 0 ||
+        nextCol >= matrix[0].length
+      ) {
+        continue;
+      }
+      if (matrix[nextRow][nextCol] === FRESH) {
+        matrix[nextRow][nextCol] = 2;
+        freshOranges--;
+        queue.push([nextRow, nextCol]);
+      }
+    }
+  }
+  if (freshOranges !== 0) {
+    return -1;
+  }
+  return minutes;
+};
+/** Walls And Gates
+ * Given a 2D array containing - 1 (walls) 0's (gates)
+ * and INF's (empty room). fill each empty room with the
+ * number of step to the nearest gate
+ *
+ * if it impossible to reach a gate, leave INF as the value
+ * INF is equal to 2147483647
+ *
+ * INF => infinity
+ */
+// const testMatrix = [
+//   [INF, -1, 0, INF],
+//   [INF, INF, INF, 0],
+//   [INF, -1, INF, -1],
+//   [0, -1, INF, INF]
+// ];
+
+// const WALL = -1;
+// const GATE = 0;
+// const EMPTY = 2147483647;
+
+const dfsWallAndGate = (
+  grid: Array<Array<number>>,
+  row: number,
+  col: number,
+  count: number = 0
+) => {
+  if (
+    row < 0 ||
+    row >= grid.length ||
+    col < 0 ||
+    col >= grid[0].length ||
+    count > grid[row][col]
+  )
+    return;
+  grid[row][col] = count;
+  for (let i = 0; i < directions.length; i++) {
+    const [rowDir, colDir] = directions[i];
+    dfsWallAndGate(grid, row + rowDir, col + colDir, count + 1);
+  }
+};
+export const wallsAndGates = (rooms: Array<Array<number>>) => {
+  for (let row = 0; row < rooms.length; row++) {
+    for (let col = 0; col < rooms[0].length; col++) {
+      if (rooms[row][col] === 0) dfsWallAndGate(rooms, row, col, 0);
+    }
+  }
+};
+
+// wallsAndGates(testMatrix)
