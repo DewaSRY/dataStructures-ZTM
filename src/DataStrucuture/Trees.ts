@@ -154,6 +154,21 @@ export class BinarySearchTree {
     if (!this.root) return [];
     return TraverseInOrder(this.root!);
   }
+  BreadthFirstSearchR(queue: Nodes[] = [this.root!], list: number[]): number[] {
+    if (!queue.length) {
+      return list;
+    }
+    const currentNode = queue.shift();
+    list.push(currentNode!.value);
+
+    if (currentNode!.left) {
+      queue.push(currentNode!.left);
+    }
+    if (currentNode!.right) {
+      queue.push(currentNode!.right);
+    }
+    return this.BreadthFirstSearchR(queue, list);
+  }
 }
 /**BFS
  * Create queue (this can be an array) and variable to store the values of nodes visited
