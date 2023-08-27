@@ -82,7 +82,7 @@ export function depthFirstTraversal(
 ) {
   if (!vertex) return null;
   visited[vertex] = true;
-  connection.push(`(${vertex})->`);
+  connection.push(vertex);
   graph[vertex].forEach((range) => {
     if (!visited[range]) depthFirstTraversal(range, graph, connection, visited);
   });
@@ -103,7 +103,7 @@ export function depthFirstIterative(
     let vertexNode = stack.pop()!;
     if (!visited[vertexNode]) {
       visited[vertexNode] = true;
-      connection.push(`(${vertexNode})->`);
+      connection.push(vertexNode);
       graph[vertexNode].forEach((range) => stack.push(range));
     }
   }
@@ -130,7 +130,7 @@ export function BreadFirstSearch(
   visited[vertex] = true;
   while (stack.length) {
     let vertexNode = stack.shift()!;
-    connection.push(`(${vertexNode})->`);
+    connection.push(vertexNode);
     graph[vertexNode].forEach((range) => {
       if (!visited[range]) {
         visited[range] = true;
@@ -151,3 +151,132 @@ export function BreadFirstSearch(
  * - Airline tickets - finding cheapest route to your destination
  * - and other else
  */
+/**Dijkstra algorithms
+ * One of the most famous and widely used algorithms around
+ * Finds the shortest path between two vertices on a graph
+ */
+/**Why is it useful
+ * - GPS - finding fastest route
+ * - Network Routing - fonds open shorts path for data
+ * - Biology used to model the spread if viruses among humans
+ * - Airline tickets - finding cheapest route to your destination
+ * - and other else
+ */
+/**Dijkstra's
+ * - This function should accept a string and ending vertex
+ * - create an object ( well call it distances) and set each to be every vertex in the adjacency list with a value of infinity ,
+ *   except  for the staring vertex which should have a value a 0
+ * - after setting a value in the distances object, add each vertex  with a priority of infinity to the priority queue, except the staring vertex , which should have a priority 0 because that where we beginning
+ * - create another object called previous and set each to be every vertex  in the adjacency list with a value of null
+ * - start looping as long as there is anything in the priority queue
+ * => dequeue a vertex from the priority queue i
+ * => if that vertex is the same as the ending vertex- we are done
+ * => otherwise loop through each values in the adjacency list at the vertex
+ *   -Calculate the distance to that vertex from the staring vertex
+ *   - if the distance is less then what is currently stored in out distances object
+ *   - update the distance object with ne lower distance
+ *   - update the previous object to contains that vertex
+ *   - enqueue the vertex with the total distance from the start node
+ */
+interface vertex {
+  node: string;
+  weight: number;
+}
+export class WeightedGraph {
+  public adjecencylist: Record<string, vertex[]> = {};
+  addVertex(vertex: string) {
+    const { adjecencylist } = this;
+    if (!adjecencylist[vertex]) adjecencylist[vertex] = [];
+    return this;
+  }
+  addEdge(mainVertex: string, rangeVertex: string, weight: number) {
+    const { adjecencylist } = this;
+    if (!adjecencylist[mainVertex])
+      throw new Error(`${mainVertex} vertex is not found`);
+    else if (!adjecencylist[rangeVertex])
+      throw new Error(`${rangeVertex} vertex is not found`);
+    adjecencylist[mainVertex].push({ node: rangeVertex, weight });
+    adjecencylist[rangeVertex].push({ node: mainVertex, weight });
+    return this;
+  }
+  removeVertex(vertex: string) {
+    const { adjecencylist } = this;
+    if (!adjecencylist[vertex])
+      throw new Error(`${vertex} vertex is not found`);
+    delete adjecencylist[vertex];
+    for (let vrtx in adjecencylist) {
+      adjecencylist[vrtx].forEach((range, idx) => {
+        if (range.node === vertex) {
+          adjecencylist[vrtx].splice(idx, 1);
+        }
+      });
+    }
+  }
+  Dijkstra(startVertex: string, finishVertex: string) {
+    const node = new PriorityQueue();
+    const distance: Record<string, number> = {};
+    const previous: Record<string, null | string> = {};
+    let path: string[] | null = [];
+    let smalls: string;
+    // build Up initial state
+    for (let vortex in this.adjecencylist) {
+      if (vortex === startVertex) {
+        distance[vortex] = 0;
+        node.enqueue(vortex, 0);
+      } else {
+        distance[vortex] = Infinity;
+        node.enqueue(vortex, Infinity);
+      }
+      previous[vortex] = null;
+    }
+    //as long as there
+    while (node.values.length) {
+      smalls = node.dequeue()?.value!;
+      if (smalls === finishVertex) {
+        //done
+        while (previous[smalls]) {
+          path.push(smalls);
+          smalls = previous[smalls]!;
+        }
+        break;
+      }
+      if (smalls || distance[smalls] !== Infinity) {
+        for (let range in this.adjecencylist[smalls]) {
+          let nextNode = this.adjecencylist[smalls][range];
+          let candidate = distance[smalls] + nextNode.weight;
+          if (candidate < distance[nextNode.node]) {
+            //updating smalls distance to neighbor
+            distance[nextNode.node] = candidate;
+            //updating previous  - how we got to nest
+            previous[nextNode.node] = smalls;
+            //enqueue in priority queue with new priority
+            node.enqueue(nextNode.node, candidate);
+          }
+        }
+      }
+    }
+    return path.concat(startVertex).reverse();
+  }
+}
+/**Simple priority queue
+ *
+ */
+interface Nodes {
+  value: string;
+  priority: number;
+}
+class PriorityQueue {
+  public values: Nodes[] = [];
+  enqueue(value: string, priority: number) {
+    this.values.push({ value, priority });
+    this.sort();
+    return this;
+  }
+  dequeue() {
+    if (this.values) return this.values.shift();
+    else return null;
+  }
+  sort() {
+    this.values.sort((a, b) => a.priority - b.priority);
+  }
+}

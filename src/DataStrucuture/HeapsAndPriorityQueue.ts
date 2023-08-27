@@ -1,6 +1,12 @@
 /**Heaps
  * Heaps is data structure look like tree with
  * additional rule
+ *  heep use to structure data base on the one specific role
+ * it might be base in the smaller value or greater,
+ *
+ * in simple understanding heap only have two common function
+ * it's insert where the value get compare and structure by role
+ * and extract the first value then re structure the node
  */
 /**Binary Heap
  *   Binary Heap very similar to binary search tree, but
@@ -30,25 +36,24 @@
  * =>and to access the parent of child is
  *   - every child parent index is (N-1)/2
  */
-
-export class MaxBinaryHeep {
-  public value: number[] = [];
+export class Heaps {
+  public heaps: number[] = [];
+  constructor(public comparator = (a: number, b: number) => a > b) {}
   insert(value: number) {
-    this.value.push(value);
+    this.heaps.push(value);
     this.BubbleUp();
+    return this;
   }
-  BubbleUp() {
-    let index = this.value.length - 1;
-    let element = this.value[index];
+  private BubbleUp() {
+    let LastNodeIndx = this.heaps.length - 1;
     while (true) {
-      let parentIndex = Math.floor((index - 1) / 2) as number;
-      let parent = this.value[parentIndex];
-      if (element < parent) break;
-      this.value[parentIndex] = element;
-      this.value[index] = parent;
-      index = parentIndex;
-      return;
+      let parentIndex = Math.floor((LastNodeIndx - 1) / 2);
+      if (parentIndex < 0) return this;
+      if (this.compare(parentIndex, LastNodeIndx)) break;
+      this.swapNode(parentIndex, LastNodeIndx);
+      LastNodeIndx = parentIndex;
     }
+    return this;
   }
   insertMuch(arr: number[]) {
     let queue = arr;
@@ -61,7 +66,7 @@ export class MaxBinaryHeep {
   }
   /**Removing
    * - Swap the first value in the values property with the last one
-   * - pop from the valus property so you can return the valus ar the end have the new root "sink down" to the correct spot
+   * - pop from the value property so you can return the value ar the end have the new root "sink down" to the correct spot
    * => Have parent index start at 0 (the root)
    * =>find the index of the left child : 2* index + 1
    * (make sure not out of bonds)
@@ -74,80 +79,6 @@ export class MaxBinaryHeep {
    * the element
    * =>return the old root
    */
-  extractMax() {
-    const max = this.value[0];
-    const end = this.value.pop();
-    if (this.value.length > 0) {
-      this.value[0] = end!;
-      this.sinkDown();
-    }
-    return max;
-  }
-  private sinkDown() {
-    let idx = 0;
-    const length = this.value.length;
-    const element = this.value[0];
-    while (true) {
-      let leftChildIndex = 2 * idx + 1;
-      let rightChildIndex = 2 * idx + 2;
-      let leftChild, rightChild;
-      let swap = null;
-      if (leftChildIndex < length) {
-        leftChild = this.value[leftChildIndex];
-        if (leftChild > element) {
-          swap = leftChildIndex;
-        }
-      }
-      if (rightChildIndex < length) {
-        rightChild = this.value[rightChildIndex];
-        if (
-          (swap === null && rightChild > element) ||
-          (swap !== null && rightChild > leftChild!)
-        ) {
-          swap = rightChildIndex;
-        }
-      }
-      if (swap === null) break;
-      this.value[idx] = this.value[swap];
-      this.value[swap] = element;
-      idx = swap;
-    }
-  }
-}
-/** Heaps
- * by me
- */
-export class Heaps {
-  public heaps: number[] = [];
-  insert(value: number) {
-    this.heaps.push(value);
-    this.BubbleUp();
-    return this;
-  }
-  private BubbleUp() {
-    let LastNodeIndx = this.heaps.length - 1;
-    let LastNode = this.heaps[LastNodeIndx];
-    while (true) {
-      let parentIndex = Math.floor((LastNodeIndx - 1) / 2);
-      if (parentIndex < 0) return this;
-      let parent = this.heaps[parentIndex];
-      if (LastNode < parent) break;
-      this.heaps[parentIndex] = LastNode;
-      this.heaps[LastNodeIndx] = parent;
-      LastNodeIndx = parentIndex;
-    }
-    return this;
-  }
-
-  insertMuch(arr: number[]) {
-    let queue = arr;
-    while (queue.length) {
-      let val = queue.shift();
-      if (!val) return;
-      this.insert(val);
-    }
-    return this;
-  }
   /** Remove value, heap only remove the greater value from the
    * structure which mean the mine root ar the first value from the
    * array, then tho re structure the heap by ut the last value to
@@ -169,27 +100,28 @@ export class Heaps {
       let rightChildIdx = parentIndex * 2 + 2;
       if (leftChildIdx >= length || rightChildIdx >= length) return this;
       let swap: number | null = null;
-      this.heaps[leftChildIdx] > this.heaps[rightChildIdx]
+      this.compare(leftChildIdx, rightChildIdx)
         ? (swap = leftChildIdx)
         : (swap = rightChildIdx);
-      if (this.swapNode(parentIndex, swap)) console.log(swap);
       if (!swap) return this;
+      this.swapNode(parentIndex, swap);
       parentIndex = swap;
     }
   }
+  private compare(indexOne: number, indexTwo: number) {
+    return this.comparator(this.heaps[indexOne], this.heaps[indexTwo]);
+  }
   swapNode(parenIndx: number, childeIndx: number) {
-    let parenNode = this.heaps[parenIndx];
-    let childeNode = this.heaps[childeIndx];
-    if (parenNode > childeNode && childeNode && parenNode) return this;
-    this.heaps[parenIndx] = childeNode;
-    this.heaps[childeIndx] = parenNode;
+    let temp = this.heaps[parenIndx];
+    this.heaps[parenIndx] = this.heaps[childeIndx];
+    this.heaps[childeIndx] = temp;
     return this;
   }
 }
 /** PriorityQueue
  *  by andrew
  */
-export class PriorityQueue {
+export class HeapSecond {
   heap: number[] = [];
   constructor(
     public comparator: (a: number, b: number) => boolean = (a, b) => a > b
@@ -265,9 +197,84 @@ export class PriorityQueue {
         this._compare(this._rightChild(nodeIdx), this._leftChild(nodeIdx))
           ? this._rightChild(nodeIdx)
           : this._leftChild(nodeIdx);
-
       this._swap(greaterChildIdx, nodeIdx);
       nodeIdx = greaterChildIdx;
     }
+  }
+}
+/**Priority queue
+ * a data structure where each element has priority. Elements
+ * with has a priority element with higher priorities are served
+ * before elements with lower priorities
+ *
+ */
+class Nodes {
+  constructor(public val: string, public priority: number) {}
+}
+/** PriorityQueue for hospitals
+ * which mean the smaller number is the priority
+ */
+export class PriorityQueue {
+  public values: Nodes[] = [];
+  constructor(public comparator = (a: number, b: number) => a < b) {}
+  enqueue(val: string, priority: number) {
+    let newNode = new Nodes(val, priority);
+    this.values.push(newNode);
+    this.bubbleUp();
+  }
+  bubbleUp() {
+    let idx = this.values.length - 1;
+    while (true) {
+      let parentIdx = Math.floor((idx - 1) / 2);
+      if (parentIdx < 0) return this;
+      if (this.compare(parentIdx, idx)) break;
+      this.swap(parentIdx, idx);
+      idx = parentIdx;
+    }
+    return this;
+  }
+  /**compare
+   * expect the first indx is truthy
+   * and the second flashy
+   */
+  private compare(indexOne: number, indexTwo: number) {
+    return this.comparator(
+      this.values[indexOne].priority,
+      this.values[indexTwo].priority
+    );
+  }
+  private swap(indexOne: number, indexTwo: number) {
+    let temp = this.values[indexOne];
+    this.values[indexOne] = this.values[indexTwo];
+    this.values[indexTwo] = temp;
+  }
+  /** return the mine priority
+   *
+   */
+  dequeue() {
+    const min = this.values[0];
+    const end = this.values.pop();
+    if (this.values.length > 0) {
+      this.values[0] = end!;
+      this.sinkDown();
+    }
+    return min;
+  }
+  private sinkDown() {
+    let idx = 0;
+    const length = this.values.length;
+    while (true) {
+      let leftChildIdx = 2 * idx + 1;
+      let rightChildIdx = 2 * idx + 2;
+      if (leftChildIdx >= length || rightChildIdx >= length) return this;
+      let swap: number | null = null;
+      this.compare(leftChildIdx, rightChildIdx)
+        ? (swap = leftChildIdx)
+        : (swap = rightChildIdx);
+      if (swap === null) break;
+      this.swap(idx, swap);
+      idx = swap;
+    }
+    return this;
   }
 }

@@ -5,39 +5,50 @@
  *   and a pointer to another node or null, doubly liked list have
  *   next and previous pointer and make it easier to search
  */
-class Nodes<T> {
+export class Nodes<T> {
   next: Nodes<T> | null = null;
   prev: Nodes<T> | null = null;
-  constructor(public value: T) {}
+  constructor(public value: T | number) {}
 }
 export class DoublyLinkedLists<T> {
   public length: number = 0;
   public head: Nodes<T> | null = null;
   public tail: Nodes<T> | null = null;
-  constructor(value: T) {
-    const NewNode = new Nodes(value);
-    this.head = NewNode;
-    this.tail = this.head;
-    this.length++;
+  constructor(value: T | null = null) {
+    this.push(value);
   }
   /** Push
    * Double linked list push work almost same with the singly but the
    * different we put the prev pointer first on new node
    */
-  push(value: T) {
+  push(value: T | null) {
     const NewNode = new Nodes(value);
+    if (value === null) return this;
+    if (!this.head) {
+      this.head = NewNode as Nodes<T>;
+      this.tail = this.head;
+      this.length++;
+      return this;
+    }
     let currentNode = this.head;
     while (currentNode) {
       if (currentNode.next !== null) {
         currentNode = currentNode.next;
       } else {
-        currentNode.next = NewNode;
+        currentNode.next = NewNode as Nodes<T>;
         NewNode.prev = currentNode;
         this.tail = currentNode.next;
         this.length++;
         return this;
       }
     }
+  }
+  pushMuch(arr: T[]) {
+    if (!arr.length) return this;
+    let value = arr.shift()!;
+    this.push(value);
+    this.pushMuch(arr);
+    return this;
   }
   /**pop
    * on Double linked list to pop the last item, we just need to

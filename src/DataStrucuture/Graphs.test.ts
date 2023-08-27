@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { Graph } from "./Graphs";
+import { Graph, WeightedGraph } from "./Graphs";
 describe("Graph ", () => {
   let suit: Graph;
   beforeEach(() => {
@@ -71,7 +71,7 @@ describe("Graph ", () => {
       expect(suit.adjecencylist[input]).not.toEqual(["banana"]);
     });
   });
-  describe("Dept first search graph", () => {
+  describe("traverse on graph", () => {
     beforeEach(() => {
       suit
         .addVertex("A")
@@ -89,40 +89,52 @@ describe("Graph ", () => {
         .addEdge("E", "F");
     });
     it("test show connection DEF", () => {
-      expect(suit.graphConnection("A")).toMatchInlineSnapshot(`
-        [
-          "(A)->",
-          "(B)->",
-          "(D)->",
-          "(E)->",
-          "(C)->",
-          "(F)->",
-        ]
-      `);
+      expect(suit.graphConnection("A")).toEqual(["A", "B", "D", "E", "C", "F"]);
     });
     it("test show connection DEF iterative", () => {
-      expect(suit.graphConnectionIterative("A")).toMatchInlineSnapshot(`
-        [
-          "(A)->",
-          "(C)->",
-          "(E)->",
-          "(F)->",
-          "(D)->",
-          "(B)->",
-        ]
-      `);
+      expect(suit.graphConnectionIterative("A")).toEqual([
+        "A",
+        "C",
+        "E",
+        "F",
+        "D",
+        "B",
+      ]);
     });
     it("test show connection BEF iterative", () => {
-      expect(suit.graphConnectionBFSIterative("A")).toMatchInlineSnapshot(`
-        [
-          "(A)->",
-          "(B)->",
-          "(C)->",
-          "(D)->",
-          "(E)->",
-          "(F)->",
-        ]
-      `);
+      expect(suit.graphConnectionBFSIterative("A")).toEqual([
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+      ]);
     });
+  });
+});
+
+describe("WeightedGraph withe  ", () => {
+  let suit: WeightedGraph;
+  beforeEach(() => {
+    suit = new WeightedGraph();
+    suit
+      .addVertex("A")
+      .addVertex("B")
+      .addVertex("C")
+      .addVertex("D")
+      .addVertex("E")
+      .addVertex("F")
+      .addEdge("A", "B", 4)
+      .addEdge("A", "C", 2)
+      .addEdge("B", "E", 3)
+      .addEdge("C", "D", 2)
+      .addEdge("C", "F", 4)
+      .addEdge("D", "E", 3)
+      .addEdge("D", "F", 1)
+      .addEdge("E", "F", 1);
+  });
+  it(" first test Dijkstra", () => {
+    expect(suit.Dijkstra("A", "E")).toEqual(["A", "C", "D", "F", "E"]);
   });
 });
