@@ -6,12 +6,18 @@ import {
   BreadForSearchPrettyPrint,
   Traverse,
 } from "./Trees";
-describe.skip("BinarySearch suit", () => {
+describe("BinarySearch suit", () => {
   let suit: BinarySearchTree;
   beforeEach(() => {
     suit = new BinarySearchTree(41);
   });
-  describe("insert should add new number", () => {
+  it("test", () => {
+    suit = new BinarySearchTree(15);
+    [20, 10, 12].forEach((num) => suit.insert(num));
+    console.log(suit.isBalanced());
+    console.log(suit.root);
+  });
+  describe.skip("insert should add new number", () => {
     it("first insert test", () => {
       suit.insert(65);
       suit.insert(20);
@@ -29,7 +35,7 @@ describe.skip("BinarySearch suit", () => {
       expect(suit.root?.right?.right?.value).toBe(91);
     });
   });
-  describe("find should return match value ", () => {
+  describe.skip("find should return match value ", () => {
     it("first test find", () => {
       suit.insert(65);
       suit.insert(20);
@@ -40,7 +46,7 @@ describe.skip("BinarySearch suit", () => {
       expect(suit.find(100)).toBe(null);
     });
   });
-  describe("tree search", () => {
+  describe.skip("tree search", () => {
     it("bread for Search", () => {
       suit.insert(65);
       suit.insert(20);

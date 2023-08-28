@@ -68,3 +68,33 @@ export class Stack {
     return printValue;
   }
 }
+class Nodess {
+  public next: Nodess | null = null;
+  constructor(public value: number) {}
+}
+
+export class StackSec {
+  public first: Nodess | null = null;
+  public last: Nodess | null = null;
+  public size: number = 0;
+
+  push(val: number) {
+    let newNode = new Nodess(val);
+    if (!this.first) {
+      this.first = newNode;
+      this.last = this.first;
+    } else {
+      let temp = this.first;
+
+      this.first = newNode;
+      this.first.next = temp;
+    }
+    return ++this.size;
+  }
+  pop() {
+    let temp = this.first;
+    this.first = this.first?.next!;
+    this.size--;
+    return temp?.value;
+  }
+}

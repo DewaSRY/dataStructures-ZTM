@@ -10,22 +10,17 @@ export function factorial(num: number): number {
   if (num === 0) return 1;
   return num * factorial(num - 1);
 }
-export function collectOddsNum(arr: number[]) {
-  let newArr: number[] = [];
+export function collectOddsNum(arr: number[], newArr: number[] = []) {
   if (arr.length === 0) return newArr;
-  if (arr[0] % 2 !== 0) newArr.push(arr[0]);
-  newArr.concat(collectOddsNum(arr.slice(1)));
+  let num = arr.shift()!;
+  if (num % 2 !== 0) newArr.push(num);
+  collectOddsNum(arr, newArr);
   return newArr;
 }
-export function collectOddValues(arr: number[]) {
-  let newArr: number[] = [];
-  if (arr.length === 0) {
-    return newArr;
-  }
-  if (arr[0] % 2 !== 0) {
-    newArr.push(arr[0]);
-  }
-  newArr = newArr.concat(collectOddValues(arr.slice(1)));
+export function collectOddValues(arr: number[], newArr: number[] = []) {
+  if (arr.length === 0) return newArr;
+  if (arr[0] % 2 !== 0) newArr.push(arr[0]);
+  collectOddValues(arr.slice(1), newArr);
   return newArr;
 }
 export function power(num: number, pow: number): number {
@@ -43,12 +38,14 @@ export function recursiveRange(num: number): number {
   if (num === 0) return 0;
   return num + recursiveRange(num - 1);
 }
-export function fib(n: number): number {
+export function fib(n: number, memo: number[] = []): number {
   if (n <= 2) return 1;
-  return fib(n - 1) + fib(n - 2);
+  if (memo[n]) return memo[n];
+  memo[n] = fib(n - 1) + fib(n - 2);
+  return memo[n];
 }
 export function reverse(str: string): string {
-  if (str.length <= 1) return str;
+  if (str.length <= 1) return str[0];
   return reverse(str.slice(1)) + str[0];
 }
 /** Dynamic Programming

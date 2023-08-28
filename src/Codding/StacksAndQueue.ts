@@ -84,3 +84,93 @@ export class QueueWithStacks {
     return this.in.length === 0 && this.out.length === 0;
   }
 }
+export class Stack {
+  public first = new Queue();
+  public last = new Queue();
+  public temp = new Queue();
+  constructor() {}
+  push(val: number) {
+    if (this.first.size !== 0) {
+      while (this.first.size != 0) {
+        this.last.enqueue(this.first.dequeue()!);
+      }
+    }
+    this.first.enqueue(val);
+    return this;
+  }
+  pop() {
+    if (this.first.size === 1) {
+      return this.first.dequeue();
+    } else {
+      while (this.last.size !== 0) {
+        if (this.last.size === 1) {
+          this.first.enqueue(this.last.dequeue()!);
+        } else {
+          this.temp.enqueue(this.last.dequeue()!);
+        }
+      }
+      while (this.temp.size) {
+        this.last.enqueue(this.temp.dequeue()!);
+      }
+      return this.first.dequeue();
+    }
+  }
+}
+
+// QUEUE AND NODE HAVE BEEN IMPLEMENTED FOR YOU
+
+class Node {
+  public next: null | Node = null;
+  constructor(public value: number) {}
+}
+
+class Queue {
+  public first: Node | null = null;
+  public last: Node | null = null;
+  public size: number = 0;
+  constructor() {}
+  enqueue(data: number) {
+    var node = new Node(data);
+
+    if (!this.first) {
+      this.first = node;
+      this.last = node;
+    } else {
+      this.last!.next = node;
+      this.last = node;
+    }
+
+    return ++this.size;
+  }
+
+  dequeue() {
+    if (!this.first) return null;
+
+    var temp = this.first;
+    if (this.first == this.last) {
+      this.last = null;
+    }
+    this.first = this.first.next;
+    this.size--;
+    return temp.value;
+  }
+}
+
+export class QueueSe {
+  public first: Node | null = null;
+  public last: Node | null = null;
+  public size: number = 0;
+  constructor() {}
+  enqueue(val: number) {
+    let newNode = new Node(val);
+    if (!this.first) {
+      this.first = newNode;
+      this.last = this.first;
+    } else {
+      this.last!.next = newNode;
+      this.last = this.last!.next;
+    }
+
+    return ++this.size;
+  }
+}

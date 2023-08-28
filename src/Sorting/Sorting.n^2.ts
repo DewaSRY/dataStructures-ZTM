@@ -32,8 +32,8 @@ export function SelectionSort(arr: number[]) {
       if (arr[rightP] < arr[minNum]) {
         minNum = rightP;
       }
-      [arr[leftP], arr[minNum]] = [arr[minNum], arr[leftP]];
     }
+    [arr[leftP], arr[minNum]] = [arr[minNum], arr[leftP]];
   }
   return arr;
 }

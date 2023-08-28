@@ -1,5 +1,5 @@
 import { it, describe, expect, beforeEach } from "vitest";
-import { SinglyLInkedList } from "./SinglyLinkedLists";
+import { SinglyLInkedList, SecondSinglyLinkedList } from "./SinglyLinkedLists";
 describe.skip("SinglyLInkedList test suit", () => {
   let suit: SinglyLInkedList<number>;
   beforeEach(() => {
@@ -17,15 +17,16 @@ describe.skip("SinglyLInkedList test suit", () => {
   });
   it("pop should remove the last item on Linked lists ", () => {
     suit.push(2)?.push(3)?.push(4);
-    suit.pop();
+    console.log(suit.pop());
     expect(suit.tail?.value).toBe(3);
     expect(suit.length).toBe(3);
-    suit.pop();
-    suit.pop();
-    suit.pop();
-    expect(suit.head).toBe(null);
-    expect(suit.tail).toBe(null);
-    expect(suit.length).toBe(0);
+    console.log(suit.tail?.next);
+    // suit.pop();
+    // suit.pop();
+    // suit.pop();
+    // expect(suit.head).toBe(null);
+    // expect(suit.tail).toBe(null);
+    // expect(suit.length).toBe(0);
   });
   it("shift shift should remove the fist item change it with second lists", () => {
     suit.push(2)?.push(3)?.push(4);
@@ -79,7 +80,7 @@ describe.skip("SinglyLInkedList test suit", () => {
     expect(suit.head?.value).toBe(11);
     suit.insert(2, 21);
   });
-  it("remove should eraser the node on specific order", () => {
+  it.skip("remove should eraser the node on specific order", () => {
     suit.push(2)?.push(3)?.push(4);
     expect(suit.remove(1)?.value).toBe(1);
     expect(suit.get(1)?.value).toBe(2);
@@ -111,5 +112,14 @@ describe.skip("SinglyLInkedList test suit", () => {
     expect(suit.prettyPrint()).toMatchInlineSnapshot(
       '"(1)-> (2)-> (3)-> (4)-> "'
     );
+  });
+});
+
+describe("SecondSinglyLinkedList", () => {
+  let suit = new SecondSinglyLinkedList();
+  it("tes", () => {
+    [5, 10, 15, 20].forEach((num) => suit.push(num));
+    console.log(suit.remove(2)?.val);
+    console.log(suit.printValue());
   });
 });

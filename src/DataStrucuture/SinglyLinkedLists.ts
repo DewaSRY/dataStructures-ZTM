@@ -46,24 +46,15 @@ export class SinglyLInkedList<T> {
    */
   pop() {
     let currentNode = this.head;
-    let longLists = this.length - 2;
-    let loopCount = 0;
-    while (currentNode) {
-      if (loopCount < longLists) {
-        currentNode = currentNode.next;
-      } else if (longLists < 0) {
-        this.head = null;
-        this.tail = this.head;
-        this.length--;
-        return this;
-      } else {
-        currentNode.next = null;
-        this.tail = currentNode;
-        this.length--;
-        return this;
-      }
-      loopCount++;
+    let newTail = currentNode;
+    while (currentNode?.next) {
+      newTail = currentNode;
+      currentNode = currentNode.next;
     }
+    this.tail = newTail;
+    this.tail!.next = null;
+    this.length--;
+    return currentNode;
   }
   /**shift
    *shift works by remove the first node on list with certain 
@@ -271,5 +262,92 @@ export class SinglyLInkedList<T> {
       currentNode = currentNode.next;
     }
     return PrettyPrint;
+  }
+}
+class Node {
+  public next: Node | null = null;
+  constructor(public val: number) {}
+}
+
+export class SecondSinglyLinkedList {
+  public head: null | Node = null;
+  public tail: null | Node = null;
+  public length = 0;
+
+  push(val: number) {
+    var newNode = new Node(val);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = this.head;
+    } else {
+      this.tail!.next = newNode;
+      this.tail = newNode;
+    }
+    this.length++;
+
+    return this;
+  }
+  get(index: number) {
+    if (index < 0 || index >= this.length) return null;
+    var counter = 0;
+    var current = this.head;
+    while (counter !== index) {
+      current = current?.next!;
+      counter++;
+    }
+    return current;
+  }
+  insert(index: number, value: number) {
+    if (index < 0 || index > this.length) return false;
+    if (index === this.length) {
+      this.push(value);
+      return true;
+    }
+    var newNode = new Node(value);
+    let prevNode = this.get(index - 1)!;
+    newNode.next = prevNode.next;
+    prevNode.next = newNode;
+    this.length++;
+    return true;
+  }
+  rotate(index: number) {
+    if (index < 0) {
+      index = this.length + index;
+    }
+    if (index > this.length) {
+      index = index % this.length;
+    }
+    if (index === 0) return;
+    console.log(index);
+    let newHead = this.head;
+    let count = 1;
+    while (count < index) {
+      newHead = newHead?.next!;
+      count++;
+    }
+    let kthNode = newHead;
+    while (newHead?.next) {
+      newHead = newHead.next;
+    }
+    newHead!.next = this.head;
+    this.head = kthNode?.next!;
+    kthNode!.next = null;
+    this.tail = kthNode;
+    console.log(this.tail);
+  }
+  remove(index: number) {
+    let currentNode = this.head;
+    while (index - 1) {
+      currentNode = currentNode?.next!;
+      index--;
+    }
+    let backPointer = currentNode?.next;
+    currentNode!.next = backPointer?.next!;
+    return backPointer;
+  }
+  printValue(node = this.head, newArr: number[] = []): number[] {
+    if (!node) return newArr;
+    newArr.push(node.val);
+    return this.printValue(node.next, newArr);
   }
 }

@@ -160,7 +160,6 @@ export class BinarySearchTree {
     }
     const currentNode = queue.shift();
     list.push(currentNode!.value);
-
     if (currentNode!.left) {
       queue.push(currentNode!.left);
     }
@@ -168,6 +167,35 @@ export class BinarySearchTree {
       queue.push(currentNode!.right);
     }
     return this.BreadthFirstSearchR(queue, list);
+  }
+  findSecondLargest() {
+    let currentNode = this.root;
+    while (currentNode) {
+      if (currentNode?.right?.right === null) {
+        return currentNode;
+      } else {
+        currentNode = currentNode.right;
+      }
+    }
+  }
+  isBalanced() {
+    let queue = [this.root];
+    let left = 0,
+      right = 0;
+    while (queue.length) {
+      let currentNode = queue.shift();
+      if (currentNode?.left) {
+        left++;
+        queue.push(currentNode.left);
+      }
+      if (currentNode?.right) {
+        right++;
+        queue.push(currentNode.right);
+      }
+    }
+    console.log(left, right);
+
+    return Math.abs(left - right) <= 1;
   }
 }
 /**BFS

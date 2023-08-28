@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { MinimumBracketsToRemove } from "./StacksAndQueue";
+import { MinimumBracketsToRemove, QueueSe } from "./StacksAndQueue";
 describe("component ", () => {
   describe(" Minimum Brackets To Remove", () => {
     let suit = MinimumBracketsToRemove;
@@ -19,4 +19,12 @@ describe("component ", () => {
   it.todo("should have some property ");
   it.todo("should have some property ");
   it.todo("should have some property ");
+});
+it("test", () => {
+  let suit = new QueueSe();
+  suit.enqueue(10);
+  suit.enqueue(100);
+  suit.enqueue(1000);
+
+  console.log(suit);
 });

@@ -278,3 +278,60 @@ export class PriorityQueue {
     return this;
   }
 }
+
+export class MaxBinaryHeap {
+  public values: number[] = [];
+
+  compare(indxOne: number, indxTwo: number) {
+    return this.values[indxOne] > this.values[indxTwo];
+  }
+  swap(indxOne: number, indxTwo: number) {
+    let temp = this.values[indxOne];
+
+    this.values[indxOne] = this.values[indxTwo];
+    this.values[indxTwo] = temp;
+  }
+  insert(val: number) {
+    this.values.push(val);
+    this.bubbleUp();
+    return this;
+  }
+
+  bubbleUp() {
+    let nodeIndex = this.values.length - 1;
+    while (true) {
+      let parentIndx = Math.floor((nodeIndex - 1) / 2);
+      if (parentIndx < 0) break;
+      if (this.compare(parentIndx, nodeIndex)) break;
+      this.swap(parentIndx, nodeIndex);
+      nodeIndex = parentIndx;
+    }
+  }
+  extractMax() {
+    let maxNum = this.values[0];
+    let end = this.values.pop()!;
+    if (this.values.length > 0) {
+      this.values[0] = end;
+    }
+    this.bubbleDown();
+
+    return maxNum;
+  }
+  bubbleDown() {
+    let parentIndx = 0;
+    let length = this.values.length - 1;
+    while (true) {
+      let leftChild = parentIndx * 2 + 1;
+      let rightChild = parentIndx * 2 + 2;
+      if (leftChild > length || rightChild > length) return this;
+      let swap;
+      this.compare(leftChild, rightChild)
+        ? (swap = leftChild)
+        : (swap = rightChild);
+      console.log(swap);
+      if (!swap) return this;
+      this.swap(parentIndx, swap);
+      parentIndx = swap;
+    }
+  }
+}

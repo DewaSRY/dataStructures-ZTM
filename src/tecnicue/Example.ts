@@ -6,7 +6,7 @@
  */
 // the regex parser
 export function cartCount(str: string) {
-  let map: { [key: string]: number } = {};
+  let map: Record<string, number> = {};
   const string = str.trim().toLocaleLowerCase();
   for (let i of string) {
     if (/[a-z0-9]/.test(i)) {
@@ -16,7 +16,7 @@ export function cartCount(str: string) {
   return map;
 }
 export function cartCountWithAlphaNumeric(str: string) {
-  let map: { [key: string]: number } = {};
+  let map: Record<string, number> = {};
   const string = str.trim().toLocaleLowerCase();
   for (let i of string) {
     if (isAlphaNumeric(i)) {

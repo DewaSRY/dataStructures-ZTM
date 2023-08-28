@@ -7,30 +7,21 @@ import {
   fib,
   reverse,
 } from "./Recursion";
-describe.skip("recursive ", () => {
+describe("recursive ", () => {
   it("factorial", () => {
     expect(factorial(10)).toMatchInlineSnapshot("3628800");
     expect(factorial(5)).toMatchInlineSnapshot("120");
     expect(factorial(0)).toMatchInlineSnapshot("1");
   });
   it("collectOddsNum", () => {
-    expect(collectOddsNum([1, 2, 3, 4, 5, 6, 7, 8, 9])).toMatchInlineSnapshot(`
-      [
-        1,
-      ]
-    `);
+    expect(collectOddsNum([1, 2, 3, 4, 5, 6, 7, 8, 9])).toEqual([
+      1, 3, 5, 7, 9,
+    ]);
   });
-  it("collectOddsNum", () => {
-    expect(collectOddValues([1, 2, 3, 4, 5, 6, 7, 8, 9]))
-      .toMatchInlineSnapshot(`
-      [
-        1,
-        3,
-        5,
-        7,
-        9,
-      ]
-    `);
+  it("collectOddValues", () => {
+    expect(collectOddValues([1, 2, 3, 4, 5, 6, 7, 8, 9])).toEqual([
+      1, 3, 5, 7, 9,
+    ]);
   });
   it("power", () => {
     expect(power(2, 5)).toMatchInlineSnapshot("32");

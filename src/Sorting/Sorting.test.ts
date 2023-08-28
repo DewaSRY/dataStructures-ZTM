@@ -1,6 +1,6 @@
 import { it, describe, expect, beforeEach } from "vitest";
 import { bubbleSort, InsertionSor, SelectionSort } from "./Sorting.n^2";
-import { MargeSort, quickSort, RadixSort } from "./Shorting.NLogN";
+import { MargeSortThird, quickSort, RadixSort, pivot } from "./Shorting.NLogN";
 describe("sorting algorithms ", () => {
   describe("n^2 algorithms", () => {
     let arr = [5, 6, 4, 1, 2, 3];
@@ -21,11 +21,14 @@ describe("sorting algorithms ", () => {
       arr = [5, 6, 4, 1, 2, 3];
     });
     it.each([
-      { algorithms: MargeSort },
       { algorithms: quickSort },
       { algorithms: RadixSort },
+      { algorithms: MargeSortThird },
     ])("$algorithms should short the array", ({ algorithms }) => {
       expect(algorithms(arr)).toEqual([1, 2, 3, 4, 5, 6]);
     });
   });
+});
+it("pivot test", () => {
+  console.log(pivot([5, 4, 9, 10, 2, 20, 8, 7, 3]));
 });

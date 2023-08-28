@@ -1,5 +1,5 @@
 import { it, describe, beforeEach, expect } from "vitest";
-import { Heaps, PriorityQueue } from "./HeapsAndPriorityQueue";
+import { Heaps, PriorityQueue, MaxBinaryHeap } from "./HeapsAndPriorityQueue";
 
 describe("Heaps", () => {
   let suit: Heaps;
@@ -51,5 +51,17 @@ describe("Heaps", () => {
         expect(actual.priority).toBe(ces[1]);
       });
     });
+  });
+});
+
+describe("test", () => {
+  let suit = new MaxBinaryHeap();
+  it("test", () => {
+    [1, 2, 3, 4, 5, 6].forEach((num) => suit.insert(num));
+
+    console.log(suit.extractMax());
+    console.log(suit.extractMax());
+    // console.log(suit.extractMax());
+    console.log(suit.values);
   });
 });

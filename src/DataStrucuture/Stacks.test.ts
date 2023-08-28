@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { Stack } from "./Stacks";
+import { Stack, StackSec } from "./Stacks";
 
 describe.skip("stack test suit", () => {
   let suit: Stack;
@@ -58,5 +58,16 @@ describe.skip("stack test suit", () => {
         next: null,
       },
     ]);
+  });
+});
+describe("StackSec", () => {
+  let suit = new StackSec();
+  suit.push(1);
+  suit.push(10);
+  suit.push(100);
+  it(" test", () => {
+    console.log(suit);
+    console.log(suit.pop());
+    console.log(suit);
   });
 });
