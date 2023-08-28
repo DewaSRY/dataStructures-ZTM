@@ -20,7 +20,6 @@ export function MargeSort(arr: number[]): number[] {
   let middleIndex = Math.floor(arr.length / 2);
   let leftPiece = arr.slice(0, middleIndex);
   let rightPiece = arr.slice(middleIndex);
-
   return Marge(MargeSort(leftPiece), MargeSort(rightPiece));
 }
 /** Marge
