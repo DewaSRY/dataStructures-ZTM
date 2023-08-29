@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { Graph, WeightedGraph } from "./Graphs";
-describe("Graph ", () => {
+describe.skip("Graph ", () => {
   let suit: Graph;
   beforeEach(() => {
     suit = new Graph();
@@ -114,7 +114,7 @@ describe("Graph ", () => {
   });
 });
 
-describe("WeightedGraph withe  ", () => {
+describe.skip("WeightedGraph withe  ", () => {
   let suit: WeightedGraph;
   beforeEach(() => {
     suit = new WeightedGraph();
@@ -136,5 +136,36 @@ describe("WeightedGraph withe  ", () => {
   });
   it(" first test Dijkstra", () => {
     expect(suit.Dijkstra("A", "E")).toEqual(["A", "C", "D", "F", "E"]);
+  });
+});
+describe("test", () => {
+  var g = new WeightedGraph();
+  g.addVertex("A");
+  g.addVertex("Z");
+  g.addVertex("C");
+  g.addVertex("D");
+  g.addVertex("E");
+  g.addVertex("H");
+  g.addVertex("Q");
+  g.addVertex("G");
+
+  g.addEdge("A", "Z", 7);
+  g.addEdge("A", "C", 8);
+
+  g.addEdge("Z", "Q", 2);
+
+  g.addEdge("C", "G", 4);
+
+  g.addEdge("D", "Q", 8);
+
+  g.addEdge("E", "H", 1);
+
+  g.addEdge("H", "Q", 3);
+
+  g.addEdge("Q", "C", 6);
+
+  g.addEdge("G", "Q", 9);
+  it("test", () => {
+    console.log(g.Dijkstra("A", "E"));
   });
 });

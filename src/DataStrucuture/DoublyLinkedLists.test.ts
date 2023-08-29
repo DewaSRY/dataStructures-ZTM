@@ -1,5 +1,5 @@
 import { it, describe, expect, beforeEach } from "vitest";
-import { DoublyLinkedLists } from "./DoublyLinkedLists";
+import { DoublyLinkedLists, DoublyLinkedListSec } from "./DoublyLinkedLists";
 describe.skip("DoublyLinkedLists test suit", () => {
   let suit: DoublyLinkedLists<number>;
   beforeEach(() => {
@@ -251,4 +251,22 @@ describe.skip("DoublyLinkedLists test suit", () => {
       '"(1) <==> (2) <==> (3) <==> (4) <==> "'
     );
   });
+});
+describe("component ", () => {
+  let t = new DoublyLinkedListSec();
+  it("test", () => {
+    [5, 10, 15, 20].forEach((num) => t.push(num));
+    console.log(t.reverse());
+    console.log(t.traverse());
+    console.log(t.length);
+    console.log(t?.head?.val);
+
+    console.log(t?.head?.next?.prev?.val);
+    console.log(t?.head?.next?.next?.val);
+    console.log(t?.head?.next?.next?.next?.val);
+  });
+  it.todo("should have some property ");
+  it.todo("should have some property ");
+  it.todo("should have some property ");
+  it.todo("should have some property ");
 });

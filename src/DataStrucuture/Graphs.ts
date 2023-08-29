@@ -164,10 +164,16 @@ export function BreadFirstSearch(
  */
 /**Dijkstra's
  * - This function should accept a string and ending vertex
- * - create an object ( well call it distances) and set each to be every vertex in the adjacency list with a value of infinity ,
- *   except  for the staring vertex which should have a value a 0
- * - after setting a value in the distances object, add each vertex  with a priority of infinity to the priority queue, except the staring vertex , which should have a priority 0 because that where we beginning
- * - create another object called previous and set each to be every vertex  in the adjacency list with a value of null
+ * - create an object ( well call it distances) and set each
+ *   to be every vertex in the adjacency list with a value of
+ *   infinity ,except  for the staring vertex which
+ *   should have a value a 0
+ * - after setting a value in the distances object, add each
+ *   vertex  with a priority of infinity to the priority queue,
+ *   except the staring vertex , which should have a priority 0
+ *   because that where we beginning
+ * - create another object called previous and set each to be
+ *   every vertex  in the adjacency list with a value of null
  * - start looping as long as there is anything in the priority queue
  * => dequeue a vertex from the priority queue i
  * => if that vertex is the same as the ending vertex- we are done
@@ -257,10 +263,51 @@ export class WeightedGraph {
     }
     return path.concat(startVertex).reverse();
   }
+  Dijkstrasec(verteStart: string, vertexFinis: string) {
+    const node = new PriorityQueue();
+    const distance: Record<string, number> = {};
+    const previous: Record<string, null | string> = {};
+    let smalles: string;
+    let path = [];
+    for (let vertext in this.adjecencylist) {
+      if (vertext === verteStart) {
+        distance[verteStart] = 0;
+        node.enqueue(vertext, 0);
+      } else {
+        distance[vertext] = Infinity;
+        node.enqueue(vertext, Infinity);
+      }
+      previous[vertext] = null;
+    }
+    while (node.values.length) {
+      smalles = node.dequeue()!.value;
+      if (smalles === vertexFinis) {
+        while (previous[smalles]) {
+          path.push(smalles);
+          smalles = previous[smalles]!;
+        }
+        break;
+      }
+      if (smalles || distance[smalles] !== Infinity) {
+        for (let range in this.adjecencylist[smalles]) {
+          let nextNode = this.adjecencylist[smalles][range];
+          let candidate = distance[smalles] + nextNode.weight;
+          if (candidate < distance[nextNode.node]) {
+            distance[nextNode.node] = candidate;
+            previous[nextNode.node] = smalles;
+            node.enqueue(nextNode.node, candidate);
+          }
+        }
+      }
+    }
+    console.log(path);
+    return path.concat(verteStart).reverse();
+  }
 }
 /**Simple priority queue
  *
  */
+
 interface Nodes {
   value: string;
   priority: number;

@@ -157,3 +157,85 @@ export function knightProbabilityThird(
   }
   return res;
 }
+/**Coin Change
+ * Write a function called coinChange which accepts two parameters: an array of denominations and a value. The function should return the number of ways you can obtain the value from the given collection of denominations. You can think of this as figuring out the number of ways to make change for a given value from a supply of coins.
+ */
+// const denominations = [1, 5, 10, 25];
+// export function coinChange(arr:number[],amount:number){
+//   let mutations:number[]
+//  let cointsCoince= arr.filter(num=> num < amount)
+
+// }
+// function countMutation(arr:number[],amount:number){
+//   let totalMutation=0
+// }
+// Recursive javascript program for
+// coin change problem.
+
+// Returns the count of ways we can
+// sum coins[0...n-1] coins to get sum "sum"
+
+export function count(
+  coins: number[],
+  sum: number,
+  n: number = coins.length,
+  dp: number[][] = Array(n + 1)
+    .fill(0)
+    .map(() => Array(sum + 1).fill(-1))
+): number {
+  // Base Case
+  if (sum === 0) return (dp[n][sum] = 1);
+  // If number of coins is 0 or sum is less than 0 then
+  // there is no way to make the sum.
+  if (n == 0 || sum < 0) return 0;
+  // If the subproblem is previously calculated then
+  // simply return the result
+  if (dp[n][sum] != -1) return dp[n][sum];
+  // Two options for the current coin
+  return (dp[n][sum] =
+    count(coins, sum - coins[n - 1], n, dp) + count(coins, sum, n - 1, dp));
+}
+
+export function minCoinChange(
+  coins: number[],
+  amount: number,
+  n = coins.length
+) {
+  // Initialize result
+  let ans = [];
+  // Traverse through all denomination
+  for (let i = n - 1; i >= 0; i--) {
+    // Find denominations
+    while (amount >= coins[i]) {
+      amount -= coins[i];
+      ans.push(coins[i]);
+    }
+  }
+  // Print result
+  return ans;
+}
+
+// Driver code
+// n = 93;
+// document.write(
+// "Following is minimal number "
+// +"of change for " + n + ": ");
+// findMin(n);
+export function findPair(arr: number[], n: number) {
+  let map: Record<number, boolean> = {};
+  if (n < 0) {
+    arr.sort(() => 1);
+  } else {
+    arr.sort(() => -1);
+  }
+  console.log(arr);
+  for (let i = 0; i < arr.length; i++) {
+    if (map[arr[i]]) return true;
+    else {
+      let rest = arr[i] - n;
+      console.log(rest);
+      map[rest] = true;
+    }
+  }
+  return false;
+}
